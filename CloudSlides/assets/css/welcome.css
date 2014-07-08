@@ -1,0 +1,19 @@
+.welcome-navbar {
+  margin-top: 20px; }
+
+.welcome-headline {
+  text-align: center; }
+
+.welcome-applogo {
+  margin-top: 20px;
+  background: url(../images/main-icon.png) center no-repeat;
+  height: 160px; }
+
+.welcome-motto {
+  text-align: center; }
+
+.welcome-function-tabs {
+  margin: 0 20px; }
+
+.welcome-main-buttons {
+  margin-bottom: 20px; }
