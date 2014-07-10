@@ -1,5 +1,8 @@
 angular.module 'cs', [
-  'ui.router'
+  'ui.router',
+
+  #  controllers
+  'welcomeCtrl'
 ]
 
 #  ui states config
@@ -10,7 +13,7 @@ angular.module 'cs', [
 #    abstract: true
     templateUrl: 'views/welcome.html'
   }
-  .state 'welcome.index',{
+  .state 'welcome.index', {
     url: '/index'
     views:
       'loginModal':
