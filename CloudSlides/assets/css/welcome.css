@@ -13,5 +13,14 @@
   text-align: center;
   margin-bottom: 20px; }
 
+.welcome-function-tabs {
+  margin-bottom: 30px; }
+
 .welcome-main-buttons {
   margin-bottom: 20px; }
+
+.welcome-footer {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  color: #777777;
+  border-top: 1px solid #e5e5e5; }

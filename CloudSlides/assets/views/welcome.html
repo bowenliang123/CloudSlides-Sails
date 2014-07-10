@@ -1,5 +1,6 @@
 <div class="container">
 
+    <!--navbar-->
     <nav class="navbar navbar-default welcome-navbar" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
@@ -28,6 +29,7 @@
     </nav>
     <!-- /navbar -->
 
+    <!--app logo and motto-->
     <div class="welcome-applogo"></div>
     <h1 class="welcome-headline">CloudSlides</h1>
 
@@ -35,6 +37,7 @@
     <p class="welcome-motto lead">
         make presentations anywhere
     </p>
+    <!--/app logo and motto-->
 
     <div class="row welcome-main-buttons">
         <div class="col-sm-2 col-sm-offset-4">
@@ -47,15 +50,7 @@
                 注册
             </button>
         </div>
-        <!--<div class="col-sm-2">-->
-        <!--<button class="btn btn-success btn-block">Android下载</button>-->
-        <!--</div>-->
     </div>
-
-    <!-- Button trigger modal -->
-    <!--<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">-->
-    <!--Launch demo modal-->
-    <!--</button>-->
 
 
     <div class="row welcome-function-tabs">
@@ -99,98 +94,13 @@
 
 
     <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span
-                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="loginModalLabel">登入云幻灯帐号</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" role="form">
-
-                        <!--Email Input-->
-                        <div class="form-group">
-                            <div class="col-sm-offset-1 col-sm-10">
-                                <input type="text" class="form-control input-hg" placeholder="Email"/>
-                            </div>
-                        </div>
-
-                        <!--Password Input-->
-                        <div class="form-group">
-                            <div class="col-sm-offset-1 col-sm-10">
-                                <input type="password" class="form-control input-hg" placeholder="Password"/>
-                            </div>
-                        </div>
-
-                        <!--</label>-->
-                        <!--<div class="form-group">-->
-                        <!--<div class="col-sm-offset-2 col-sm-10">-->
-                        <!--<label class="checkbox" for="checkbox1">-->
-                        <!--<span class="icons"><span class="first-icon fui-checkbox-unchecked"></span>-->
-                        <!--<span class="second-icon fui-checkbox-checked"></span></span>-->
-                        <!--<input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">-->
-                        <!--记住我-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                    <div class="col-sm-offset-4 col-sm-4">
-                        <button type="button" class="btn btn-primary btn-block">登录</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div ui-view="loginModal"></div>
 
     <!-- Signup Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span
-                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="signupModalLabel">注册云幻灯帐号</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" role="form">
+    <div ui-view="signupModal"></div>
 
-                        <!--Email Input-->
-                        <div class="form-group">
-                            <div class="col-sm-offset-1 col-sm-10">
-                                <input type="text" class="form-control input-hg" placeholder="Email"/>
-                            </div>
-                        </div>
 
-                        <!--Password Input-->
-                        <div class="form-group">
-                            <div class="col-sm-offset-1 col-sm-10">
-                                <input type="password" class="form-control input-hg" placeholder="Password"/>
-                            </div>
-                        </div>
-
-                        <!--Password Confirm Input-->
-                        <div class="form-group">
-                            <div class="col-sm-offset-1 col-sm-10">
-                                <input type="password" class="form-control input-hg" placeholder="Confirm Password"/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                    <div class="col-sm-offset-4 col-sm-4">
-                        <button type="button" class="btn btn-primary btn-block">注册</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="welcome-footer">
+        Bowen Liang
     </div>
-
 </div>

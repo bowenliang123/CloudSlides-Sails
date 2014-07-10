@@ -1,12 +1,25 @@
 angular.module 'cs', [
   'ui.router'
 ]
-.config ($stateProvider, $urlRouterProvider)->
+
+#  ui states config
+.config ($stateProvider)->
   $stateProvider
   .state 'welcome', {
     url: '/welcome'
+#    abstract: true
     templateUrl: 'views/welcome.html'
+  }
+  .state 'welcome.index',{
+    url: '/index'
+    views:
+      'loginModal':
+        templateUrl: 'views/welcome/loginModal.html'
+      'signupModal':
+        templateUrl: 'views/welcome/signupModal.html'
   }
 
 
-  $urlRouterProvider.otherwise('/welcome')
+#ui route config
+.config ($urlRouterProvider)->
+  $urlRouterProvider.when('', '/welcome/index');
