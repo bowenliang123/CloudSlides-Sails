@@ -1,19 +1,17 @@
 .welcome-navbar {
-  margin-top: 20px; }
+  margin-top: 10px; }
 
 .welcome-headline {
   text-align: center; }
 
 .welcome-applogo {
-  margin-top: 20px;
+  margin-top: 10px;
   background: url(../images/main-icon.png) center no-repeat;
-  height: 160px; }
+  height: 140px; }
 
 .welcome-motto {
-  text-align: center; }
-
-.welcome-function-tabs {
-  margin: 0 20px; }
+  text-align: center;
+  margin-bottom: 20px; }
 
 .welcome-main-buttons {
   margin-bottom: 20px; }
