@@ -2,15 +2,18 @@ angular.module 'cs', [
   'ui.router',
 
   #  controllers
-  'welcomeCtrl'
+  'welcomeCtrl',
+  'mypptCtrl'
 ]
 
 #  ui states config
 .config ($stateProvider)->
   $stateProvider
+
+  #Welcome
   .state 'welcome', {
     url: '/welcome'
-#    abstract: true
+    abstract: true
     templateUrl: 'views/welcome.html'
   }
   .state 'welcome.index', {
@@ -22,6 +25,11 @@ angular.module 'cs', [
         templateUrl: 'views/welcome/signupModal.html'
   }
 
+  #myppt
+  .state 'myppt', {
+    url: '/myppt'
+    templateUrl: 'views/myppt.html'
+  }
 
 #ui route config
 .config ($urlRouterProvider)->

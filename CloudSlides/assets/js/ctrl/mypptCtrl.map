@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "mypptCtrl.js",
+  "sourceRoot": "",
+  "sources": [
+    "mypptCtrl.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,OAAO,CAAC,MAAR,CAAe,WAAf,EAA4B,EAA5B,CACA,CAAC,UADD,CACY,WADZ,EACyB,SAAC,MAAD,GAAA,CADzB,CAAA,CAAA;AAAA"
+}
