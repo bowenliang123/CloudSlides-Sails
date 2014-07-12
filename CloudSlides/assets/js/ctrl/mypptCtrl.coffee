@@ -1,4 +1,7 @@
 angular.module 'mypptCtrl', []
-.controller 'mypptCtrl', ($scope)->
+.controller 'mypptCtrl', ($scope, User)->
+  User.query((users)->
+    console.log(users)
+  )
 
 

@@ -1,9 +1,14 @@
 angular.module 'cs', [
   'ui.router',
+  'ngResource',
 
-  #  controllers
+  # controllers
   'welcomeCtrl',
-  'mypptCtrl'
+  'mypptCtrl',
+
+
+  # models
+  'User'
 ]
 
 #  ui states config
