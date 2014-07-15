@@ -1,10 +1,14 @@
 angular.module 'cs', [
-  'ui.router',
-  'ngResource',
+  'ui.router'
+  'ngResource'
+  'ngMessages'
+  'LocalStorageModule'
 
   # controllers
-  'welcomeCtrl',
-  'mypptCtrl',
+  'welcomeCtrl'
+  'welcome.loginModalCtrl'
+  'welcome.signupModalCtrl'
+  'mypptCtrl'
 
 
   # models

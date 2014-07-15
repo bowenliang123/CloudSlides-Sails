@@ -1,6 +1,6 @@
 <!--Signup Modal-->
 <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
+     aria-hidden="true" ng-controller="welcome.signupModalCtrl">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -45,7 +45,7 @@
             <div class="modal-footer">
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                 <div class="col-sm-offset-4 col-sm-4">
-                    <button type="button" class="btn btn-primary btn-block">注册</button>
+                    <button type="button" class="btn btn-primary btn-block" ng-click="signup()">注册</button>
                 </div>
             </div>
         </div>

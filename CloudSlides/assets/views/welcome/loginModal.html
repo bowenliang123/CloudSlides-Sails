@@ -1,6 +1,6 @@
 <!--Login Modal-->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
+     aria-hidden="true" ng-controller="welcome.loginModalCtrl">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +9,7 @@
                 <h4 class="modal-title" id="loginModalLabel">登入云幻灯帐号</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" name="loginForm">
 
                     <!--Email Input-->
                     <div class="form-group">
@@ -17,7 +17,10 @@
                             <input type="text"
                                    class="form-control input-hg"
                                    placeholder="Email"
-                                   ng-model="loginEmail"/>
+                                   name="loginEmailInput"
+                                   ng-model="loginEmail"
+                                   required
+                                   />
                         </div>
                     </div>
 
@@ -27,27 +30,39 @@
                             <input type="password"
                                    class="form-control input-hg"
                                    placeholder="Password"
-                                   ng-model="loginPassword"/>
+                                   name="loginPasswordInput"
+                                   ng-model="loginPassword"
+                                   required
+                                    />
                         </div>
                     </div>
 
-                    <!--</label>-->
-                    <!--<div class="form-group">-->
-                    <!--<div class="col-sm-offset-2 col-sm-10">-->
-                    <!--<label class="checkbox" for="checkbox1">-->
-                    <!--<span class="icons"><span class="first-icon fui-checkbox-unchecked"></span>-->
-                    <!--<span class="second-icon fui-checkbox-checked"></span></span>-->
-                    <!--<input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">-->
-                    <!--记住我-->
-                    <!--</label>-->
-                    <!--</div>-->
-                    <!--</div>-->
+                    <!--Alert Box-->
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <!--email input error-->
+                            <div ng-messages="loginForm.loginEmailInput.$error">
+                                <div class="alert alert-success" role="alert" ng-message="required">
+                                    请输入电邮地址
+                                </div>
+                                <div class="alert alert-success" role="alert" ng-message="pattern">
+                                    请检查你的电邮格式
+                                </div>
+                            </div>
+                            <!--password input error-->
+                            <div ng-messages="loginForm.loginPasswordInput.$error">
+                                <div class="alert alert-success" role="alert" ng-message="required">
+                                    请输入密码
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                 <div class="col-sm-offset-4 col-sm-4">
-                    <button type="button" class="btn btn-success btn-block">登录</button>
+                    <button type="button" class="btn btn-success btn-block" ng-click="login()">登录</button>
                 </div>
             </div>
         </div>
