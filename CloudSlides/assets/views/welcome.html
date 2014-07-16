@@ -1,120 +1,115 @@
 <div ng-controller="welcomeCtrl">
-    <div class="container">
 
-        <!--navbar-->
-        <nav class="navbar navbar-default welcome-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-                    <span class="sr-only">Toggle navigation</span>
-                </button>
-                <a class="navbar-brand" href="#">CloudSlides 云幻灯</a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse-01">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">欢迎</a></li>
-                    <li><a href="#">应用下载</a></li>
-                    <li><a href="#/myppt" ng-if="isLogined">我的云幻灯</a></li>
-                </ul>
-
-
-                <!-- 登录或注册按钮  -->
-                <div class="navbar-right" ng-if="!isLogined">
-                    <button class="btn btn-success navbar-btn" type="button" data-toggle="modal"
-                            data-target="#loginModal">
-                        登录
-                    </button>
-                    <button class="btn btn-primary navbar-btn" type="button" data-toggle="modal"
-                            data-target="#signupModal">
-                        注册
-                    </button>
-                </div>
-
-                <!--用户信息 & 登出按钮-->
-                <ul class="nav navbar-nav navbar-right" ng-if="isLogined">
-                    <li><a href="#/myppt">Hi,{{userLoginInfo.user.name}}</a></li>
-                    <li>
-                        <button class="btn btn-success navbar-btn" type="button" ng-click="logout()">登出</button>
-                    </li>
-                </ul>
-            </div>
-
-        </nav>
-        <!-- /navbar -->
-
-        <!--app logo and motto-->
-        <div class="welcome-applogo"></div>
-        <h1 class="welcome-headline">CloudSlides</h1>
+    <!--navbar-->
+    <nav class="navbar navbar-default welcome-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+            <a class="navbar-brand" href="#">CloudSlides 云幻灯</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">欢迎</a></li>
+                <li><a href="#">应用下载</a></li>
+                <li><a href="#/myppt" ng-if="isLogined">我的云幻灯</a></li>
+            </ul>
 
 
-        <p class="welcome-motto lead">
-            make presentations anywhere
-        </p>
-        <!--/app logo and motto-->
-
-        <div class="row welcome-main-buttons">
-            <div class="col-sm-2 col-sm-offset-4">
-                <button class="btn btn-success btn-block" data-toggle="modal" data-target="#loginModal">
+            <!-- 登录或注册按钮  -->
+            <div class="navbar-right" ng-if="!isLogined">
+                <button class="btn btn-success navbar-btn" type="button" data-toggle="modal"
+                        data-target="#loginModal">
                     登录
                 </button>
-            </div>
-            <div class="col-sm-2">
-                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#signupModal">
+                <button class="btn btn-primary navbar-btn" type="button" data-toggle="modal"
+                        data-target="#signupModal">
                     注册
                 </button>
             </div>
+
+            <!--用户信息 & 登出按钮-->
+            <ul class="nav navbar-nav navbar-right" ng-if="isLogined">
+                <li><a href="#/myppt">Hi, {{userLoginInfo.user.name}}!</a></li>
+                <li>
+                    <button class="btn navbar-btn btn-link" type="button" ng-click="logout()">登出</button>
+                </li>
+            </ul>
         </div>
 
+    </nav>
+    <!-- /navbar -->
 
-        <div class="row welcome-function-tabs">
+    <!--app logo and motto-->
+    <div class="welcome-applogo"></div>
+    <h1 class="welcome-headline">CloudSlides</h1>
 
-            <div class="col-sm-4">
-                <div class="tile">
-                    <img src="images/loop.svg" class="tile-image"/>
 
-                    <h3 class="tile-title">
-                        实时幻灯
-                    </h3>
+    <p class="welcome-motto lead">
+        make presentations anywhere
+    </p>
+    <!--/app logo and motto-->
 
-                    <p>在不同终端同步显示幻灯</p>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="tile">
-                    <img src="images/pencils.svg" class="tile-image"/>
-
-                    <h3 class="tile-title">
-                        同步白板
-                    </h3>
-
-                    <p>即画即所见，幻灯可以随意涂画</p>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="tile">
-                    <img src="images/book.svg" class="tile-image"/>
-
-                    <h3 class="tile-title">
-                        幻灯转码
-                    </h3>
-
-                    <p>上传幻灯，服务器自动转码保存</p>
-                </div>
-            </div>
+    <div class="row welcome-main-buttons">
+        <div class="col-sm-2 col-sm-offset-4">
+            <button class="btn btn-success btn-block" data-toggle="modal" data-target="#loginModal">
+                登录
+            </button>
         </div>
-
-
-        <!-- Login Modal -->
-        <div ui-view="loginModal"></div>
-
-
-        <!-- Signup Modal -->
-        <div ui-view="signupModal"></div>
-
-
-        <div class="welcome-footer">
-            Bowen Liang
+        <div class="col-sm-2">
+            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#signupModal">
+                注册
+            </button>
         </div>
     </div>
+
+
+    <div class="row welcome-function-tabs">
+
+        <div class="col-sm-4">
+            <div class="tile">
+                <img src="images/loop.svg" class="tile-image"/>
+
+                <h3 class="tile-title">
+                    实时幻灯
+                </h3>
+
+                <p>在不同终端同步显示幻灯</p>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="tile">
+                <img src="images/pencils.svg" class="tile-image"/>
+
+                <h3 class="tile-title">
+                    同步白板
+                </h3>
+
+                <p>即画即所见，幻灯可以随意涂画</p>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="tile">
+                <img src="images/book.svg" class="tile-image"/>
+
+                <h3 class="tile-title">
+                    幻灯转码
+                </h3>
+
+                <p>上传幻灯，服务器自动转码保存</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Login Modal -->
+    <div ui-view="loginModal"></div>
+
+
+    <!-- Signup Modal -->
+    <div ui-view="signupModal"></div>
+
+
 </div>

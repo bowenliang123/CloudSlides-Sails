@@ -19,6 +19,13 @@ angular.module 'cs', [
 .config ($stateProvider)->
   $stateProvider
 
+  # main
+  .state 'main',{
+    url:'/main'
+#    abstract:true
+    templateUrl: 'views/main.html'
+  }
+
   #Welcome
   .state 'welcome', {
     url: '/welcome'
