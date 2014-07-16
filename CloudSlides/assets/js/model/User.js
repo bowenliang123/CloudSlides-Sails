@@ -19,7 +19,7 @@
     obj.isLogined = function() {
       var loginInfo;
       loginInfo = obj.getLoginInfo();
-      if (loginInfo && loginInfo.user !== void 0 && loginInfo.token.length > 0) {
+      if (loginInfo && loginInfo.user !== void 0) {
         return true;
       } else {
         return false;

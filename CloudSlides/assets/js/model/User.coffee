@@ -16,7 +16,7 @@ angular.module 'User', ['LocalStorageModule']
   #检测是否已登录
   obj.isLogined = ()->
     loginInfo = obj.getLoginInfo()
-    if loginInfo && loginInfo.user!=undefined && loginInfo.token.length>0
+    if loginInfo && loginInfo.user!=undefined
       return true
     else
       return false

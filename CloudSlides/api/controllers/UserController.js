@@ -31,13 +31,12 @@ module.exports = {
                 console.log(user);
 
                 if (!user) {
-                    result={
+                    result = {
                         status: 101,
                         data: 'user not found'
                     }
                     return res.ok(result);
                 }
-
 
 
                 result = {
@@ -64,6 +63,7 @@ module.exports = {
         //params
         var email = req.param('email');
         var password = req.param('password');
+        var name = req.param('name');
 
         User.findOne({email: email})
             .exec(function (err, user) {
@@ -76,11 +76,12 @@ module.exports = {
 
 
                 //新增user
-                var newUser = {email: email, password: password}
+                var newUser = {email: email, password: password, name: name};
                 console.log(newUser);
                 User.create(newUser, function () {
                     return res.json({
                         status: 0,
+                        user: newUser,
                         token: '1234567890'
                     });
                 });
