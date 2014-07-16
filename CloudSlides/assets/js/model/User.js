@@ -19,7 +19,7 @@
     obj.isLogined = function() {
       var loginInfo;
       loginInfo = obj.getLoginInfo();
-      if (loginInfo) {
+      if (loginInfo && loginInfo.user !== void 0 && loginInfo.token.length > 0) {
         return true;
       } else {
         return false;
@@ -45,6 +45,9 @@
         token: token
       };
       return localStorageService.set(key_loginInfo, loginInfo);
+    };
+    obj.clearLoginInfo = function() {
+      return localStorageService.remove(key_loginInfo);
     };
     return obj;
   });

@@ -18,7 +18,7 @@
           alert('相同email已注册');
         } else if (status === 0) {
           User.setLoginInfo(data.user, data.token);
-          alert('登录成功');
+          $('#loginModal').modal('hide');
           return $location.url('/myppt');
         }
       }, function(httpResponse) {

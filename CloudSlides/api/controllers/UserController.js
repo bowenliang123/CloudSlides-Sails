@@ -44,10 +44,7 @@ module.exports = {
                     status: 0,
                     data: {
                         //用户信息
-                        user: {
-                            email: user.email,
-                            password: user.password
-                        },
+                        user: user,
                         //临时token
                         token: '1234567890'
                     }

@@ -28,9 +28,12 @@ angular.module 'welcome.loginModalCtrl', ['User']
           return
 
         else if status == 0
-          #登录成功
+          # 登录成功
+          # 写入登录信息
           User.setLoginInfo(data.user, data.token);
-          alert('登录成功')
+          # 隐藏登录框
+          $('#loginModal').modal('hide');
+          # 跳转到myppt页面
           $location.url('/myppt');
 
     ,
