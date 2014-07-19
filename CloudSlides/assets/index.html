@@ -22,6 +22,7 @@
 
     <!--App-->
     <!--controllers-->
+    <script src="js/ctrl/navbarCtrl.js"></script>
     <script src="js/ctrl/welcome/welcomeCtrl.js"></script>
     <script src="js/ctrl/welcome/loginModalCtrl.js"></script>
     <script src="js/ctrl/welcome/signupModalCtrl.js"></script>
@@ -37,6 +38,46 @@
 <body ng-app="cs">
 
 <div class="container">
+
+    <!--navbar-->
+    <nav class="navbar navbar-default welcome-navbar" role="navigation" ng-controller="navbarCtrl">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+            <a class="navbar-brand" href="#">CloudSlides 云幻灯</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">欢迎</a></li>
+                <li><a href="#">应用下载</a></li>
+                <li><a href="#/myppt" ng-if="isLogined">我的云幻灯</a></li>
+            </ul>
+
+
+            <!-- 登录或注册按钮  -->
+            <div class="navbar-right" ng-if="!isLogined">
+                <button class="btn btn-success navbar-btn" type="button" data-toggle="modal"
+                        data-target="#loginModal">
+                    登录
+                </button>
+                <button class="btn btn-primary navbar-btn" type="button" data-toggle="modal"
+                        data-target="#signupModal">
+                    注册
+                </button>
+            </div>
+
+            <!--用户信息 & 登出按钮-->
+            <ul class="nav navbar-nav navbar-right" ng-if="isLogined">
+                <li><a href="#/myppt">Hi, {{userLoginInfo.user.name}}!</a></li>
+                <li>
+                    <button class="btn navbar-btn btn-link" type="button" ng-click="logout()">登出</button>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+    <!-- /navbar -->
 
     <ui-view></ui-view>
 

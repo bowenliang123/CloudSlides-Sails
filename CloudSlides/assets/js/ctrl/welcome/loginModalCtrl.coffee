@@ -1,5 +1,5 @@
 angular.module 'welcome.loginModalCtrl', ['User']
-.controller 'welcome.loginModalCtrl', ($scope, User, $location)->
+.controller 'welcome.loginModalCtrl', ($scope, $rootScope, $location, User)->
   #变量声明
 
   #私有
@@ -9,8 +9,6 @@ angular.module 'welcome.loginModalCtrl', ['User']
   $scope.login = ()->
     email = $scope.loginEmail;
     password = $scope.loginPassword;
-    console.log($scope.loginEmail)
-    console.log(password)
 
     #执行登录操作
     User.login(
@@ -33,6 +31,9 @@ angular.module 'welcome.loginModalCtrl', ['User']
           User.setLoginInfo(data.user, data.token);
           # 隐藏登录框
           $('#loginModal').modal('hide');
+
+          $rootScope.$broadcast 'login_success';
+
           # 跳转到myppt页面
           $location.url('/myppt');
 

@@ -5,6 +5,7 @@ angular.module 'cs', [
   'LocalStorageModule'
 
   # controllers
+  'navbarCtrl'
   'welcomeCtrl'
   'welcome.loginModalCtrl'
   'welcome.signupModalCtrl'
