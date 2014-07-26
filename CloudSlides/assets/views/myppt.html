@@ -1,37 +1,29 @@
-<div ng-controller="mypptCtrl">
-    <div class="container">
+<div class="container" ng-controller="mypptCtrl">
+    <div class="row">
+        <!--side navigator-->
+        <ul class="col-sm-3 nav nav-pills nav-stacked">
+            <li class="active"><a href="#">我的幻灯</a></li>
+            <li><a href="#">我发起的会议</a></li>
+            <li><a href="#">我参加的会议</a></li>
+        </ul>
 
-        <!--navbar-->
-        <!--<nav class="navbar navbar-default welcome-navbar" role="navigation">-->
-            <!--<div class="navbar-header">-->
-                <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">-->
-                    <!--<span class="sr-only">Toggle navigation</span>-->
-                <!--</button>-->
-                <!--<a class="navbar-brand" href="#">CloudSlides 云幻灯</a>-->
-            <!--</div>-->
-            <!--<div class="collapse navbar-collapse" id="navbar-collapse-01">-->
-                <!--<ul class="nav navbar-nav">-->
-                    <!--<li><a href="#fakelink">欢迎</a></li>-->
-                    <!--<li><a href="#fakelink">应用下载</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
-        <!--</nav>-->
+        <!--main content-->
+        <div class="col-sm-8 well">
 
-        <!--<div class="row">-->
-            <!--sidebar-->
-            <div class="list-group col-sm-3">
-                <a href="#" class="list-group-item active">
-                    Cras justo odio
-                </a>
-                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
+            <div class="row">
+                <input type="file" class="myppt-fileinput" ng-file-select="onFileSelect($files)">
+            </div>
+            <div class="row myppt-upload-status" ng-show="isUploading">
+                <div class="progress col-sm-9">
+                    <div class="progress-bar" style="width: {{progress}}%;"></div>
+                </div>
+                <div class="col-sm-3">
+                    <button class="cancel-button btn btn-block btn-danger" ng-click="upload.abort()">取消上传</button>
+                </div>
             </div>
 
+        </div>
 
-            <!--main content-->
-        <!--</div>-->
+
     </div>
 </div>

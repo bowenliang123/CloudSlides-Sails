@@ -35,6 +35,16 @@
       loginInfo = this.getLoginInfo();
       obj.setLoginInfo(user, loginInfo.token);
     };
+    obj.getUserId = function() {
+      var userInfo;
+      userInfo = obj.getUserInfo();
+      return userInfo.id;
+    };
+    obj.getToken = function() {
+      var loginInfo;
+      loginInfo = obj.getLoginInfo();
+      return loginInfo.token;
+    };
     obj.getLoginInfo = function() {
       return localStorageService.get(key_loginInfo);
     };
@@ -48,6 +58,12 @@
     };
     obj.clearLoginInfo = function() {
       return localStorageService.remove(key_loginInfo);
+    };
+    obj.genAuthHeader = function() {
+      return {
+        'auth_userid': obj.getUserId(),
+        'auth_token': obj.getToken()
+      };
     };
     return obj;
   });

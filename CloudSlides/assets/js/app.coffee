@@ -1,4 +1,5 @@
 angular.module 'cs', [
+  'angularFileUpload'
   'ui.router'
   'ngResource'
   'ngMessages'
@@ -11,9 +12,9 @@ angular.module 'cs', [
   'welcome.signupModalCtrl'
   'mypptCtrl'
 
-
   # models
   'User'
+  'Ppt'
 ]
 
 #  ui states config
