@@ -4,8 +4,8 @@ angular.module 'Ppt', ['User']
 
   obj = $resource '/ppt/:id', {
     # paramDefaults
-    userId: User.getUserId()
-    token: User.getToken()
+#    userId: User.getUserId()
+#    token: User.getToken()
   }, {
     # actions
   }

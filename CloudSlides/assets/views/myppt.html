@@ -1,29 +1,70 @@
 <div class="container" ng-controller="mypptCtrl">
     <div class="row">
         <!--side navigator-->
-        <ul class="col-sm-3 nav nav-pills nav-stacked">
+        <ul class="col-sm-2 nav nav-pills nav-stacked">
             <li class="active"><a href="#">我的幻灯</a></li>
             <li><a href="#">我发起的会议</a></li>
             <li><a href="#">我参加的会议</a></li>
         </ul>
 
+
         <!--main content-->
-        <div class="col-sm-8 well">
+        <!--上传幻灯-->
+        <div class="col-sm-10">
 
-            <div class="row">
-                <input type="file" class="myppt-fileinput" ng-file-select="onFileSelect($files)">
-            </div>
-            <div class="row myppt-upload-status" ng-show="isUploading">
-                <div class="progress col-sm-9">
-                    <div class="progress-bar" style="width: {{progress}}%;"></div>
-                </div>
-                <div class="col-sm-3">
-                    <button class="cancel-button btn btn-block btn-danger" ng-click="upload.abort()">取消上传</button>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <input type="file" class="myppt-fileinput" ng-file-select="onFileSelect($files)">
+                    </div>
+                    <div class="row myppt-upload-status" ng-show="isUploading">
+                        <div class="progress col-sm-9">
+                            <div class="progress-bar" style="width: {{progress}}%;"></div>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="cancel-button btn btn-block btn-danger" ng-click="upload.abort()">取消上传
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+
+            <!--我的幻灯列表-->
+            <div class="page-header">
+                <h3>我的幻灯<small> 共有{{ppts.length}}个幻灯</small><span><button class="btn btn-sm" ng-click="refreshPptsData()">刷新数据</button></span></h3>
+
+            </div>
+
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>幻灯ID</th>
+                    <th>文件名</th>
+                    <th>文件大小</th>
+                    <th>页数</th>
+                    <th>上传时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="ppt in ppts">
+                    <td>{{ppt.id}}</td>
+                    <td>{{ppt.fileName}}</td>
+                    <td>{{ppt.size}}</td>
+                    <td>{{ppt.pageCount}}</td>
+                    <td>{{ppt.createdAt}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-success">发起会议</button>
+                        <button class="btn btn-sm btn-danger" ng-click="deletePpt({{ppt.id}})">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
-
     </div>
+
+</div>
 </div>

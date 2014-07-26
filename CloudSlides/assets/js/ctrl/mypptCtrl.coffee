@@ -1,27 +1,7 @@
 angular.module 'mypptCtrl', ['User', 'Ppt', 'angularFileUpload']
 .controller 'mypptCtrl', ($scope, $upload, User, Ppt)->
-#  newppt = new Ppt({
-#    filename: 'test.ppt'
-#    pageCount: 5
-#    owner: User.getUserId()
-#  })
-#
-#  newppt.$save();
-  $scope.ppts = Ppt.query(
-    #onSucess
-    (value, responseHeaders)->
-  ,
-    #onError
-    (httpResponse)->
-  );
 
 
-  #  $scope.onFileSelect = ($files)->
-  #    for i in [0.. $files.length - 1]
-  #      file = $files[i];
-
-
-  $scope.progress = 0;
 
   $scope.onFileSelect = ($files) ->
     # 准备上传
@@ -56,10 +36,37 @@ angular.module 'mypptCtrl', ['User', 'Ppt', 'angularFileUpload']
       $scope.isUploading = false;
     );
 
+  #私有方法
 
+
+  ##共有方法
+
+  #刷新数据
+  $scope.refreshPptsData = ()->
+    Ppt.query({
+        owner: User.getUserId()
+      },
+
+      #onSucess
+      (value, responseHeaders)->
+        console.log(value);
+        $scope.ppts = value;
+    ,
+      #onError
+      (httpResponse)->
+    );
+
+  #删除幻灯
+  $scope.deletePpt = (pptId)->
+
+
+
+  #初始化
   init = ()->
     $scope.isUploading = false;
-  #    $scope.isUploading=true;
+    $scope.ppts=[];
+    $scope.progress = 0;
+    $scope.refreshPptsData();
 
   # 初始化
   init();

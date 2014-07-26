@@ -2,10 +2,7 @@
 (function() {
   angular.module('Ppt', ['User']).factory('Ppt', function($resource, User) {
     var obj;
-    obj = $resource('/ppt/:id', {
-      userId: User.getUserId(),
-      token: User.getToken()
-    }, {});
+    obj = $resource('/ppt/:id', {}, {});
     return obj;
   });
 

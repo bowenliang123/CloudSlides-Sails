@@ -2,8 +2,6 @@
 (function() {
   angular.module('mypptCtrl', ['User', 'Ppt', 'angularFileUpload']).controller('mypptCtrl', function($scope, $upload, User, Ppt) {
     var init;
-    $scope.ppts = Ppt.query(function(value, responseHeaders) {}, function(httpResponse) {});
-    $scope.progress = 0;
     $scope.onFileSelect = function($files) {
       var pptFile;
       pptFile = $files[0];
@@ -29,8 +27,20 @@
         return $scope.isUploading = false;
       });
     };
+    $scope.refreshPptsData = function() {
+      return Ppt.query({
+        owner: User.getUserId()
+      }, function(value, responseHeaders) {
+        console.log(value);
+        return $scope.ppts = value;
+      }, function(httpResponse) {});
+    };
+    $scope.deletePpt = function(pptId) {};
     init = function() {
-      return $scope.isUploading = false;
+      $scope.isUploading = false;
+      $scope.ppts = [];
+      $scope.progress = 0;
+      return $scope.refreshPptsData();
     };
     return init();
   });
