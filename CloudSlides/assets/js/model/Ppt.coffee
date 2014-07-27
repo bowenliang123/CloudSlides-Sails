@@ -8,6 +8,10 @@ angular.module 'Ppt', ['User']
 #    token: User.getToken()
   }, {
     # actions
+    'delete':{
+      url: '/ppt/delete'
+      method:'POST'
+    }
   }
 
   return obj;

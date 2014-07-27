@@ -24,7 +24,8 @@
         return $scope.progress = percent;
       }).success(function(data, status, headers, config) {
         console.log(data);
-        return $scope.isUploading = false;
+        $scope.isUploading = false;
+        return $scope.refreshPptsData();
       });
     };
     $scope.refreshPptsData = function() {
@@ -35,7 +36,17 @@
         return $scope.ppts = value;
       }, function(httpResponse) {});
     };
-    $scope.deletePpt = function(pptId) {};
+    $scope.deletePpt = function(pptId) {
+      return Ppt["delete"]({
+        pptId: pptId
+      }, {}, function(value, responseHeaders) {
+        console.log(value);
+        if (value.status === 0) {
+          alert('删除成功');
+          return $scope.refreshPptsData();
+        }
+      }, function(httpResponse) {});
+    };
     init = function() {
       $scope.isUploading = false;
       $scope.ppts = [];

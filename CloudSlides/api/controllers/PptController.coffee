@@ -1,5 +1,17 @@
 module.exports =
 
+  delete: (req,res)->
+    #取出变量
+    pptId = req.param('pptId');
+
+    Ppt.destroy({id:pptId}).exec (err)->
+      if err
+        sails.log(err);
+        return res.serverError(err);
+      return res.json({
+        status: 0
+      });
+
 
   upload: (req, res)->
     #取出变量

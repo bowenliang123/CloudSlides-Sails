@@ -2,7 +2,12 @@
 (function() {
   angular.module('Ppt', ['User']).factory('Ppt', function($resource, User) {
     var obj;
-    obj = $resource('/ppt/:id', {}, {});
+    obj = $resource('/ppt/:id', {}, {
+      'delete': {
+        url: '/ppt/delete',
+        method: 'POST'
+      }
+    });
     return obj;
   });
 
