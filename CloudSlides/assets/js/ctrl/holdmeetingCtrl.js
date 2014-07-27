@@ -43,13 +43,14 @@
       }, function(httpResponse) {});
     };
     $scope.showModalHoldNewMeeting = function() {
-      $('#holdNewMeetingModal').modal('show');
       $scope.ppts = [];
-      return Ppt.query({
+      Ppt.query({
         owner: User.getUserId()
       }, function(value, responseHeaders) {
         return $scope.ppts = value;
       }, function(httpResponse) {});
+      $('#holdNewMeetingModal').modal('show');
+      return null;
     };
     $scope.holdMeetings = [];
     $scope.ppts = [];

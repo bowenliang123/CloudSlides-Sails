@@ -10,6 +10,13 @@ angular.module 'Meeting', ['User']
     'delete':
       url: '/meeting/delete'
       method: 'POST'
+    'queryAttend':
+      url: '/meeting/queryAttend'
+      method: 'POST'
+      isArray: true
+    'attend':
+      url: '/meeting/attend'
+      method: 'POST'
   };
 
   return obj;

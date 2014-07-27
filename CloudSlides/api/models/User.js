@@ -34,7 +34,8 @@ module.exports = {
         //参与的会议
         attendMeetings: {
             collection: 'Meeting',
-            via: 'attendees'
+            via: 'attendees',
+            dominant: true
         }
 
     }

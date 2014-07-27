@@ -33,6 +33,43 @@
           status: 0
         });
       });
+    },
+    queryAttend: function(req, res) {
+      var userId;
+      userId = req.param('userId');
+      return User.findOne({
+        id: userId
+      }).populate('attendMeetings').exec(function(err, user) {
+        if (err) {
+          return res.serverError(err);
+        }
+        sails.log('queryAttend');
+        sails.log(user);
+        return res.json(user.attendMeetings);
+      });
+    },
+    attend: function(req, res) {
+      var meetingId, userId;
+      userId = req.param('userId');
+      meetingId = req.param('meetingId');
+      return User.findOne({
+        id: userId
+      }).exec(function(err, user) {
+        if (err) {
+          return res.serverError(err);
+        }
+        sails.log('attend meeting');
+        sails.log(user);
+        return Meeting.findOne({
+          id: meetingId
+        }).exec(function(err, meeting) {
+          if (err) {
+            return res.serverError(err);
+          }
+          user.attendMeetings.add(meetingId);
+          return user.save(sails.log);
+        });
+      });
     }
   };
 

@@ -67,14 +67,11 @@ angular.module 'holdmeetingCtrl', ['User', 'Ppt', 'Meeting']
     );
 
   $scope.showModalHoldNewMeeting = ()->
-    $('#holdNewMeetingModal').modal('show');
-
     #重新获取可用PPT数据
     $scope.ppts = [];
-    Ppt.query({
-        owner: User.getUserId()
-      },
-
+    Ppt.query(
+      owner: User.getUserId()
+    ,
       #onSucess
       (value, responseHeaders)->
 #        console.log(value);
@@ -88,6 +85,9 @@ angular.module 'holdmeetingCtrl', ['User', 'Ppt', 'Meeting']
       #onError
       (httpResponse)->
     );
+
+    $('#holdNewMeetingModal').modal('show');
+    return null;
 
 
   #初始化
