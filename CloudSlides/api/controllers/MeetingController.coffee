@@ -65,6 +65,24 @@ module.exports =
 
         user.attendMeetings.add(meetingId);
         user.save(sails.log);
+        return res.json(
+          status:0
+        );
+
+
+  quit:(req, res)->
+    #取出变量
+    userId= req.param('userId');
+    meetingId = req.param('meetingId');
+
+    Meeting.findOne({id:meetingId}).exec (err, meeting)->
+      if err
+        return res.serverError(err);
+
+      meeting.attendees.remove(userId);
+      meeting.save();
+
+      return res.ok();
 
 
 

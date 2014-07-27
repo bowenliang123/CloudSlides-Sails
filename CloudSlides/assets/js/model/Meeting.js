@@ -19,6 +19,10 @@
       'attend': {
         url: '/meeting/attend',
         method: 'POST'
+      },
+      'quit': {
+        url: '/meeting/quit',
+        method: 'POST'
       }
     });
     return obj;

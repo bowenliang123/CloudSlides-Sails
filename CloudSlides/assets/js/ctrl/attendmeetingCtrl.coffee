@@ -44,12 +44,24 @@ angular.module 'attendmeetingCtrl', ['User', 'Meeting']
         if value.status == 0
           $('#attendNewMeetingModal').modal('hide');
           $scope.refreshMeetingData();
-          return;
     ,
       #onError
       (httpResponse)->
     );
 
+  #退出会议
+  $scope.quitAttendMeeting = (meetingId)->
+    Meeting.quit(
+      userId: User.getUserId()
+      meetingId: meetingId
+    ,
+      #onSucess
+      (value, responseHeaders)->
+        $scope.refreshMeetingData();
+    ,
+      #onError
+      (httpResponse)->
+    );
 
   #初始化
   init();

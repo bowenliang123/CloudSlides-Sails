@@ -27,8 +27,16 @@
       }, function(value, responseHeaders) {
         if (value.status === 0) {
           $('#attendNewMeetingModal').modal('hide');
-          $scope.refreshMeetingData();
+          return $scope.refreshMeetingData();
         }
+      }, function(httpResponse) {});
+    };
+    $scope.quitAttendMeeting = function(meetingId) {
+      return Meeting.quit({
+        userId: User.getUserId(),
+        meetingId: meetingId
+      }, function(value, responseHeaders) {
+        return $scope.refreshMeetingData();
       }, function(httpResponse) {});
     };
     return init();

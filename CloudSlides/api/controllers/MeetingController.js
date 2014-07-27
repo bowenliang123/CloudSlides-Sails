@@ -67,8 +67,26 @@
             return res.serverError(err);
           }
           user.attendMeetings.add(meetingId);
-          return user.save(sails.log);
+          user.save(sails.log);
+          return res.json({
+            status: 0
+          });
         });
+      });
+    },
+    quit: function(req, res) {
+      var meetingId, userId;
+      userId = req.param('userId');
+      meetingId = req.param('meetingId');
+      return Meeting.findOne({
+        id: meetingId
+      }).exec(function(err, meeting) {
+        if (err) {
+          return res.serverError(err);
+        }
+        meeting.attendees.remove(userId);
+        meeting.save();
+        return res.ok();
       });
     }
   };
