@@ -32,7 +32,9 @@
 
             <!--我的幻灯列表-->
             <div class="page-header">
-                <h3>我的幻灯<small> 共有{{ppts.length}}个幻灯</small><span><button class="btn btn-sm" ng-click="refreshPptsData()">刷新数据</button></span></h3>
+                <h3>我的幻灯
+                    <small> 共有{{ppts.length}}个幻灯</small>
+                    <span><button class="btn btn-xs btn-warning" ng-click="refreshPptsData()">刷新数据</button></span></h3>
 
             </div>
 
@@ -56,8 +58,12 @@
                     <td>{{ppt.pageCount}}</td>
                     <td>{{ppt.createdAt}}</td>
                     <td>
-                        <button class="btn btn-sm btn-success">发起会议</button>
-                        <button class="btn btn-sm btn-danger" ng-click="deletePpt(ppt.id)">删除</button>
+                        <div>
+                            <button class="btn btn-xs btn-block btn-success">发起会议</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-xs btn-block btn-danger" ng-click="deletePpt(ppt.id)">删除</button>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
