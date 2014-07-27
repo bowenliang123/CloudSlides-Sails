@@ -38,8 +38,7 @@ angular.module 'welcome.signupModalCtrl', ['User']
           # 已有相同用户注册
           alert('相同电邮用户已注册');
           return;
-
-
+    ,
       #onError
       (httpResponse)->
         console.log(httpResponse);

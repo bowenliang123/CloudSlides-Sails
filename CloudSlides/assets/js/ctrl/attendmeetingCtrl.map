@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "attendmeetingCtrl.js",
+  "sourceRoot": "",
+  "sources": [
+    "attendmeetingCtrl.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,OAAO,CAAC,MAAR,CAAe,mBAAf,EAAmC,CAAC,MAAD,CAAnC,CACA,CAAC,UADD,CACY,mBADZ,EACiC,SAAC,MAAD,EAAS,IAAT,GAAA,CADjC,CAAA,CAAA;AAAA"
+}

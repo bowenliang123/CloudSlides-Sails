@@ -11,10 +11,13 @@ angular.module 'cs', [
   'welcome.loginModalCtrl'
   'welcome.signupModalCtrl'
   'mypptCtrl'
+  'holdmeetingCtrl'
+  'attendmeetingCtrl'
 
   # models
   'User'
   'Ppt'
+  'Meeting'
 ]
 
 #  ui states config
@@ -22,8 +25,8 @@ angular.module 'cs', [
   $stateProvider
 
   # main
-  .state 'main',{
-    url:'/main'
+  .state 'main', {
+    url: '/main'
 #    abstract:true
     templateUrl: 'views/main.html'
   }
@@ -48,6 +51,18 @@ angular.module 'cs', [
     url: '/myppt'
     templateUrl: 'views/myppt.html'
   }
+
+  #holdmeeting
+  .state 'holdmeeting', {
+    url: '/holdmeeting'
+    templateUrl: 'views/holdmeeting.html'
+  }
+  #attendmeeting
+  .state 'attendmeeting', {
+    url: '/attendmeeting'
+    templateUrl: 'views/attendmeeting.html'
+  }
+
 
 #ui route config
 .config ($urlRouterProvider)->

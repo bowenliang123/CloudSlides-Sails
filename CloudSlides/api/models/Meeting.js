@@ -18,6 +18,11 @@ module.exports = {
             model: 'User'
         },
 
+        //幻灯
+        ppt: {
+            model:'Ppt'
+        },
+
         //参与人
         attendees: {
             collection: 'User',

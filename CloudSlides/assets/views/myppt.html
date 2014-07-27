@@ -1,17 +1,16 @@
 <div class="container" ng-controller="mypptCtrl">
     <div class="row">
-        <!--side navigator-->
+        <!--侧导航栏-->
         <ul class="col-sm-2 nav nav-pills nav-stacked">
             <li class="active"><a href="#">我的幻灯</a></li>
-            <li><a href="#">我发起的会议</a></li>
-            <li><a href="#">我参加的会议</a></li>
+            <li><a href="#/holdmeeting">我发起的会议</a></li>
+            <li><a href="#/attendmeeting">我参加的会议</a></li>
         </ul>
 
 
         <!--main content-->
-        <!--上传幻灯-->
         <div class="col-sm-10">
-
+            <!--上传幻灯-->
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
@@ -35,7 +34,6 @@
                 <h3>我的幻灯
                     <small> 共有{{ppts.length}}个幻灯</small>
                     <span><button class="btn btn-xs btn-warning" ng-click="refreshPptsData()">刷新数据</button></span></h3>
-
             </div>
 
 
