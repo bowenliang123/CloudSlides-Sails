@@ -13,6 +13,8 @@ angular.module 'cs', [
   'mypptCtrl'
   'holdmeetingCtrl'
   'attendmeetingCtrl'
+  'controlCtrl'
+  'watchCtrl'
 
   # models
   'User'
@@ -25,43 +27,52 @@ angular.module 'cs', [
   $stateProvider
 
   # main
-  .state 'main', {
+  .state 'main',
     url: '/main'
 #    abstract:true
     templateUrl: 'views/main.html'
-  }
+
 
   #Welcome
-  .state 'welcome', {
+  .state 'welcome',
     url: '/welcome'
     abstract: true
     templateUrl: 'views/welcome.html'
-  }
-  .state 'welcome.index', {
+
+  .state 'welcome.index',
     url: '/index'
     views:
       'loginModal':
         templateUrl: 'views/welcome/loginModal.html'
       'signupModal':
         templateUrl: 'views/welcome/signupModal.html'
-  }
+
 
   #myppt
-  .state 'myppt', {
+  .state 'myppt',
     url: '/myppt'
     templateUrl: 'views/myppt.html'
-  }
 
   #holdmeeting
-  .state 'holdmeeting', {
+  .state 'holdmeeting',
     url: '/holdmeeting'
     templateUrl: 'views/holdmeeting.html'
-  }
+
   #attendmeeting
-  .state 'attendmeeting', {
+  .state 'attendmeeting',
     url: '/attendmeeting'
     templateUrl: 'views/attendmeeting.html'
-  }
+
+
+  #watch meeting
+  .state 'watch',
+    url: '/watch/:meetingId'
+    templateUrl: 'views/watch.html'
+
+  #control meeting
+  .state 'control',
+    url: '/control/:meetingId'
+    templateUrl: 'views/control.html'
 
 
 #ui route config

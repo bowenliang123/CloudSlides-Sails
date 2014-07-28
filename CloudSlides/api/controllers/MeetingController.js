@@ -40,12 +40,27 @@
       return User.findOne({
         id: userId
       }).populate('attendMeetings').exec(function(err, user) {
+        var meeting, meetingIds, _fn, _i, _len, _ref;
         if (err) {
           return res.serverError(err);
         }
-        sails.log('queryAttend');
-        sails.log(user);
-        return res.json(user.attendMeetings);
+        meetingIds = [];
+        _ref = user.attendMeetings;
+        _fn = function(meeting) {
+          return meetingIds.push(meeting.id);
+        };
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          meeting = _ref[_i];
+          _fn(meeting);
+        }
+        return Meeting.find({
+          id: meetingIds
+        }).populate('holder').exec(function(err, meetingsFull) {
+          if (err) {
+            return res.serverError(err);
+          }
+          return res.json(meetingsFull);
+        });
       });
     },
     attend: function(req, res) {

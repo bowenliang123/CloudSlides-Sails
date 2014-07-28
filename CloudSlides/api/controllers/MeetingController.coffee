@@ -32,50 +32,59 @@ module.exports =
         status: 0
       );
 
-  queryAttend: (req,res)->
+  queryAttend: (req, res)->
     #取出变量
-    userId= req.param('userId');
+    userId = req.param('userId');
 
     #查询对应用户
-    User.findOne({id:userId}).populate('attendMeetings').exec (err, user)->
+    User.findOne({id: userId}).populate('attendMeetings').exec (err, user)->
       if err
         return res.serverError(err);
 
-      sails.log('queryAttend');
-      sails.log(user);
-      return res.json(user.attendMeetings);
+      #提取所有参加会议的ID
+      meetingIds = [];
+      for meeting in user.attendMeetings
+        do (meeting)->
+          meetingIds.push(meeting.id);
+
+      #获取所有参加会议的详细信息
+      Meeting.find({id: meetingIds})
+      .populate('holder')
+      .exec (err, meetingsFull)->
+        if err
+          return res.serverError(err);
+
+        return res.json(meetingsFull);
+
 
   attend: (req, res)->
     #取出变量
-    userId= req.param('userId');
+    userId = req.param('userId');
     meetingId = req.param('meetingId');
 
-    User.findOne({id:userId}).exec (err, user)->
+    User.findOne({id: userId}).exec (err, user)->
       if err
         return res.serverError(err);
 
       sails.log('attend meeting');
       sails.log(user);
-      Meeting.findOne({id:meetingId}).exec (err, meeting)->
+      Meeting.findOne({id: meetingId}).exec (err, meeting)->
         if err
           return res.serverError(err);
-
-#        meeting.attendees.add(userId);
-#        meeting.save(sails.log);
 
         user.attendMeetings.add(meetingId);
         user.save(sails.log);
         return res.json(
-          status:0
+          status: 0
         );
 
 
-  quit:(req, res)->
+  quit: (req, res)->
     #取出变量
-    userId= req.param('userId');
+    userId = req.param('userId');
     meetingId = req.param('meetingId');
 
-    Meeting.findOne({id:meetingId}).exec (err, meeting)->
+    Meeting.findOne({id: meetingId}).exec (err, meeting)->
       if err
         return res.serverError(err);
 

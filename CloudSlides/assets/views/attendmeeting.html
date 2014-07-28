@@ -25,9 +25,8 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>会议ID</th>
+                    <th>#</th>
                     <th>主题</th>
-                    <!--<th>对应幻灯</th>-->
                     <th>发起人</th>
                     <th>观看人数</th>
                     <th>操作</th>
@@ -37,19 +36,17 @@
                 <tr ng-repeat="meeting in attendMeetings">
                     <td>{{meeting.id}}</td>
                     <td>{{meeting.topic}}</td>
-                    <!--<td>-->
-                        <!--<div>(# {{meeting.ppt.id}})</div>-->
-                        <!--<div>{{meeting.ppt.fileName}}-->
-                        <!--</div>-->
-                    <!--</td>-->
-                    <td>{{meeting.holder}}</td>
+                    <td>
+                        <div>{{meeting.holder.name}}</div>
+                        <div>({{meeting.holder.email}})</div>
+                    </td>
                     <td>{{meeting.attendees.length}}</td>
                     <td>
+                        <div><a class="btn btn-xs btn-success" href="#/watch/{{meeting.id}}">观看会议</a></div>
                         <div>
-                            <button class="btn btn-xs btn-link btn-danger"
-                                    ng-click="quitAttendMeeting(meeting.id)">删除
-                            </button>
+                            <button class="btn btn-xs btn-danger" ng-click="quitAttendMeeting(meeting.id)">退出会议</button>
                         </div>
+
                     </td>
                 </tr>
                 </tbody>
@@ -57,7 +54,6 @@
 
         </div>
     </div>
-
 
     <!--加入观看会议modal-->
     <!-- Modal -->
