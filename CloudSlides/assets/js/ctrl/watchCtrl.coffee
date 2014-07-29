@@ -15,7 +15,7 @@ angular.module 'watchCtrl', ['User', 'Meeting']
   init = ()->
     $scope.meetingId = $stateParams.meetingId
     $scope.currentPageId = 1 #默认显示第一页
-    $scope.maxPageId = 1;
+    $scope.maxPageId = 1
     $scope.isCurrentPageDrawed = false # 当前页码未绘图
     $scope.refreshMeetingData($scope.meetingId)
     initSubscribe($scope.meetingId)
@@ -24,7 +24,7 @@ angular.module 'watchCtrl', ['User', 'Meeting']
 
   #监听会议数据加载完成消息
   $scope.$on 'meeting_data_loaded', ()->
-    $scope.maxPageId = $scope.meeting.ppt.pageCount;
+    $scope.maxPageId = $scope.meeting.ppt.pageCount
     # 开始监听图片加载完成消息
     $scope.readyPageImagesId = []
     $scope.$on 'page_image_loaded', (event, pageId)->
@@ -44,12 +44,10 @@ angular.module 'watchCtrl', ['User', 'Meeting']
       #onSuccess
       (value, responseHeaders)->
         $scope.meeting = value
-        $scope.pageRange = []
-        $scope.pageUrlArr = []
-        for i in [1..$scope.meeting.ppt.pageCount]
-          do (i)->
-            $scope.pageRange.push(i)
-            $scope.pageUrlArr.push('/ppt/getImage?pptId=' + $scope.meeting.ppt.id + '&pageId=' + i)
+        $scope.pageRange = [1..$scope.meeting.ppt.pageCount]
+#        for i in [1..$scope.meeting.ppt.pageCount]
+#          do (i)->
+#            $scope.pageRange.push(i)
 
         # 广播会议数据加载完成消息
         $rootScope.$broadcast('meeting_data_loaded')

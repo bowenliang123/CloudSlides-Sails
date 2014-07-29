@@ -25,7 +25,7 @@
                         <a class="fui-arrow-left"></a>
                     </li>
 
-                    <li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}">
+                    <li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}" ng-click="updatePageId(index)">
                         <a>{{index}}</a>
                     </li>
 
@@ -37,7 +37,6 @@
 
             <!--画板-->
             <div class="control_canvas_wrapper">
-                <!--<canvas drawing width="720" height="540" image="'http://localhost:1337/ppt/getImage?pptId=53d47a73b07e3680044ca1a1&pageId=1'"></canvas>-->
                 <canvas drawing width="720" height="540" id="pageCanvas"></canvas>
             </div>
         </div>
@@ -46,8 +45,8 @@
     </div>
 
     <div hidden>
-        <div ng-repeat="url in pageUrlArr">
-            <img src="{{url}}" pageid="{{$index+1}}" id="page{{$index+1}}" onloadnotify/>
+        <div ng-repeat="index in pageRange">
+            <img ng-src="/ppt/getImage?pptId={{meeting.ppt.id}}&pageId={{index}}" pageid="{{index}}" id="page{{index}}" onloadnotify/>
         </div>
     </div>
 </div>

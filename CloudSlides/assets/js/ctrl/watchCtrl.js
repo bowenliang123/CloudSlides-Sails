@@ -33,17 +33,13 @@
       return Meeting.get({
         id: $scope.meetingId
       }, function(value, responseHeaders) {
-        var i, _fn, _i, _ref;
+        var _i, _ref, _results;
         $scope.meeting = value;
-        $scope.pageRange = [];
-        $scope.pageUrlArr = [];
-        _fn = function(i) {
-          $scope.pageRange.push(i);
-          return $scope.pageUrlArr.push('/ppt/getImage?pptId=' + $scope.meeting.ppt.id + '&pageId=' + i);
-        };
-        for (i = _i = 1, _ref = $scope.meeting.ppt.pageCount; 1 <= _ref ? _i <= _ref : _i >= _ref; i = 1 <= _ref ? ++_i : --_i) {
-          _fn(i);
-        }
+        $scope.pageRange = (function() {
+          _results = [];
+          for (var _i = 1, _ref = $scope.meeting.ppt.pageCount; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--){ _results.push(_i); }
+          return _results;
+        }).apply(this);
         return $rootScope.$broadcast('meeting_data_loaded');
       }, function(httpResponse) {
         return console.log(httpResponse);

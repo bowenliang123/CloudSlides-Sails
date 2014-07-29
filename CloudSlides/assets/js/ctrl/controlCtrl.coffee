@@ -12,8 +12,6 @@ angular.module 'controlCtrl', ['User', 'Meeting']
     $scope.isCurrentPageDrawed = true
 
   #私有函数
-
-
   init = ()->
     $scope.meetingId = $stateParams.meetingId #会议ID
     $scope.currentPageId = 1 #默认显示第一页
@@ -33,9 +31,6 @@ angular.module 'controlCtrl', ['User', 'Meeting']
 
       # 加载完成的页码与当前页码匹配 且未绘制
       if pageId == $scope.currentPageId and !$scope.isCurrentPageDrawed
-#        img = document.getElementById('page' + pageId)
-#        console.log(img)
-#        ctx.drawImage(img, 0, 0)
         drawPageImage(pageId)
 
     return
@@ -50,12 +45,7 @@ angular.module 'controlCtrl', ['User', 'Meeting']
       #onSuccess
       (value, responseHeaders)->
         $scope.meeting = value
-        $scope.pageRange = []
-        $scope.pageUrlArr = []
-        for i in [1..$scope.meeting.ppt.pageCount]
-          do (i)->
-            $scope.pageRange.push(i)
-            $scope.pageUrlArr.push('/ppt/getImage?pptId=' + $scope.meeting.ppt.id + '&pageId=' + i)
+        $scope.pageRange = [1..$scope.meeting.ppt.pageCount];
 
         # 广播会议数据加载完成消息
         $rootScope.$broadcast('meeting_data_loaded')
@@ -71,7 +61,6 @@ angular.module 'controlCtrl', ['User', 'Meeting']
     else
       $scope.currentPageId = pageId;
 
-      #      pageId = $scope.currentPageId
 
       #发送页码更新请求
       io.socket.post('/meeting/updatePage',
