@@ -16,6 +16,10 @@ angular.module 'cs', [
   'controlCtrl'
   'watchCtrl'
 
+  # directives
+  'drawing'
+  'onloadnotify'
+
   # models
   'User'
   'Ppt'
@@ -78,3 +82,6 @@ angular.module 'cs', [
 #ui route config
 .config ($urlRouterProvider)->
   $urlRouterProvider.when('', '/welcome/index');
+
+
+

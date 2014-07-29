@@ -1,4 +1,6 @@
 module.exports =
+
+#新建会议
   create: (req, res)->
     #取出变量
     pptId = req.param('pptId');
@@ -18,7 +20,7 @@ module.exports =
         status: 0
       );
 
-
+#删除会议
   delete: (req, res)->
     #取出变量
     meetingId = req.param('meetingId');
@@ -32,6 +34,7 @@ module.exports =
         status: 0
       );
 
+#查询用户观看的所有会议
   queryAttend: (req, res)->
     #取出变量
     userId = req.param('userId');
@@ -56,7 +59,7 @@ module.exports =
 
         return res.json(meetingsFull);
 
-
+#加入观看会议
   attend: (req, res)->
     #取出变量
     userId = req.param('userId');
@@ -78,7 +81,7 @@ module.exports =
           status: 0
         );
 
-
+#退出观看会议
   quit: (req, res)->
     #取出变量
     userId = req.param('userId');
@@ -93,5 +96,34 @@ module.exports =
 
       return res.ok();
 
+#订阅观看的会议
+  subscribeWatch: (req, res, next)->
 
+    #取出变量
+    meetingId = req.param('meetingId');
 
+    sails.log('subscribeWatch ' + meetingId);
+
+    #    Meeting.findOne({id: meetingId}).exec (err, meeting)->
+    #      if err
+    #        return res.serverError(err);
+
+    #订阅指定会议
+    Meeting.subscribe(req, meetingId, ['message']);
+
+    return next();
+
+#控制页码
+  updatePage: (req, res)->
+    #取出变量
+    meetingId = req.param('meetingId');
+    pageId = req.param('pageId');
+
+    sails.log('updatePage ' + meetingId+' '+pageId);
+
+    Meeting.message(meetingId, {pageId: pageId});
+
+    return res.ok(
+      meetingId: meetingId
+      pageId: pageId
+    );

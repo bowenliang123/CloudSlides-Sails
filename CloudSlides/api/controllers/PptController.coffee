@@ -1,10 +1,23 @@
+fs = require('fs');
+
+base_file_path = '/Users/simonlbw/Desktop/file/';
+
+# 生成幻灯文件路径
+genPptFilePath = (pptId, fileName)->
+  return base_file_path + pptId + '/' + fileName;
+
+# 生成幻灯页图片文件路径
+genImagePath = (pptId, pageId)->
+  return base_file_path + pptId + '/' + pageId + '.jpg';
+
 module.exports =
 
-  delete: (req,res)->
+# 删除幻灯接口
+  delete: (req, res)->
     #取出变量
     pptId = req.param('pptId');
 
-    Ppt.destroy({id:pptId}).exec (err)->
+    Ppt.destroy({id: pptId}).exec (err)->
       if err
         sails.log(err);
         return res.serverError(err);
@@ -12,7 +25,7 @@ module.exports =
         status: 0
       });
 
-
+#上传幻灯接口
   upload: (req, res)->
     #取出变量
     userId = req.param('userId');
@@ -23,27 +36,81 @@ module.exports =
     pptFile = req.file('file');
 
 
-    #上传
-    pptFile.upload (err, files)->
+    #增加一条PPT记录
+    Ppt.create({
+      owner: userId
+      fileName: fileName
+      pageCount: 0 # 默认为未转换，因此页数为0
+      size: size
+      type: type
+    }).exec (err, newppt)->
       if err
         return res.serverError(err);
 
-      #增加一条PPT记录
-      Ppt.create({
-        owner: userId
-        fileName: fileName
-        pageCount: 0 # 默认为未转换，因此页数为0
-        size: size
-        type: type
-      }).exec (err, newppt)->
-        sails.log(newppt);
-        User.findOne({id: userId}).populate('ppts').exec (err, user)->
-          sails.log(user);
-      #          user.ppts.add(newppt.id);
-      #          user.save();
+      sails.log(newppt);
 
-      return res.json {
-        message: files.length + ' file(s) uploaded successfully!'
-        files: files
-      }
+      #上传文件
+      file_path = genPptFilePath(newppt.id, newppt.fileName);
+      pptFile.upload file_path, (err, files)->
+        if err
+          return res.serverError(err);
+
+        return res.json(
+          status: 0
+          file: files
+        );
+
+
+#获取图片接口
+  getImage: (req, res)->
+    #取出变量
+    pptId = req.param('pptId');
+    pageId = req.param('pageId');
+
+    #    if_modified_since = req.header('If-Modified-Since');
+    #    if if_modified_since < new Date().getTime()
+    #      return res.status(304);
+
+    fs.readFile(genImagePath(pptId, pageId),
+    (err, data)->
+      if err
+        sails.log('getImage error:');
+        sails.log(err);
+        #文件不存在
+        if err.code == 'ENOENT'
+          return res.notFound();
+
+        sails.log(err);
+        return res.serverError(err);
+
+      #获取文件成功，返回数据
+      res.set('Content-Type', 'image/jpeg');
+      res.header('Last-Modified', new Date().getTime());
+      return res.send(new Buffer(data));
+    );
+
+#上传图片接口
+  uploadImage: (req, res)->
+    #取出变量
+    pptId = req.param('pptId');
+    pageId = req.param('pageId');
+
+    imageFile = req.file('file');
+
+    #上传文件
+    image_file_path = genImagePath(pptId, pageId);
+    imageFile.upload(image_file_path
+    ,
+    (err, files)->
+      if err
+        return res.serverError(err);
+
+      return res.json(
+        status: 0
+        file: files
+      );
+    );
+
+
+
 

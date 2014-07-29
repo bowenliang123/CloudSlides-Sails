@@ -103,6 +103,26 @@
         meeting.save();
         return res.ok();
       });
+    },
+    subscribeWatch: function(req, res, next) {
+      var meetingId;
+      meetingId = req.param('meetingId');
+      sails.log('subscribeWatch ' + meetingId);
+      Meeting.subscribe(req, meetingId, ['message']);
+      return next();
+    },
+    updatePage: function(req, res) {
+      var meetingId, pageId;
+      meetingId = req.param('meetingId');
+      pageId = req.param('pageId');
+      sails.log('updatePage ' + meetingId + ' ' + pageId);
+      Meeting.message(meetingId, {
+        pageId: pageId
+      });
+      return res.ok({
+        meetingId: meetingId,
+        pageId: pageId
+      });
     }
   };
 

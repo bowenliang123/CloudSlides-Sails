@@ -1,10 +1,12 @@
 <div ng-controller="watchCtrl">
+
     <div class="row">
         <!--侧导航栏-->
         <ul class="col-sm-2 nav nav-pills nav-stacked">
             <li><a href="#/myppt">我的幻灯</a></li>
             <li><a href="#/holdmeeting">我发起的会议</a></li>
             <li><a href="#/attendmeeting">我参加的会议</a></li>
+            <li class="active"><a>观看会议</a></li>
         </ul>
 
 
@@ -16,6 +18,38 @@
                     <small>{{meeting.id}}</small>
                 </h3>
             </div>
+
+            <!--页码指示器-->
+            <div class="pagination">
+                <ul>
+                    <!--<li class="previous" ng-click="updatePageId(currentPageId-1)">-->
+                    <!--<a class="fui-arrow-left"></a>-->
+                    <!--</li>-->
+
+                    <li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}">
+                        <a>{{index}}</a>
+                    </li>
+
+                    <!--<li class="next" ng-click="updatePageId(currentPageId+1)">-->
+                    <!--<a class="fui-arrow-right"></a>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+
+            <!--画板-->
+            <div class="control_canvas_wrapper">
+                <!--<canvas drawing width="720" height="540" image="'http://localhost:1337/ppt/getImage?pptId=53d47a73b07e3680044ca1a1&pageId=1'"></canvas>-->
+                <canvas drawing width="720" height="540" id="pageCanvas"></canvas>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div hidden>
+        <div ng-repeat="url in pageUrlArr">
+            <img src="{{url}}" pageid="{{$index+1}}" id="page{{$index+1}}" onloadnotify/>
         </div>
     </div>
 </div>
