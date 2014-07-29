@@ -1,12 +1,19 @@
 angular.module 'controlCtrl', ['User', 'Meeting']
 .controller 'controlCtrl', ($scope, $stateParams, $timeout, $rootScope, User, Meeting)->
   #私有变量
-  ctx = document.getElementById('pageCanvas').getContext("2d")
+  pageCanvas = document.getElementById('pageCanvas')
+  ctx = pageCanvas.getContext("2d")
 
   #绘制页码图片
   drawPageImage = (pageId)->
-    #绘制
+    #获取对应image对象
     img = document.getElementById('page' + pageId)
+
+    #根据图像大小调整canvas画布大小
+    pageCanvas.width = img.width
+    pageCanvas.height = img.height
+
+    #将图形绘入canvas
     ctx.drawImage(img, 0, 0)
     # 已绘制
     $scope.isCurrentPageDrawed = true

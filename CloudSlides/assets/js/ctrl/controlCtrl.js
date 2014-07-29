@@ -3,11 +3,14 @@
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('controlCtrl', ['User', 'Meeting']).controller('controlCtrl', function($scope, $stateParams, $timeout, $rootScope, User, Meeting) {
-    var ctx, drawPageImage, init;
-    ctx = document.getElementById('pageCanvas').getContext("2d");
+    var ctx, drawPageImage, init, pageCanvas;
+    pageCanvas = document.getElementById('pageCanvas');
+    ctx = pageCanvas.getContext("2d");
     drawPageImage = function(pageId) {
       var img;
       img = document.getElementById('page' + pageId);
+      pageCanvas.width = img.width;
+      pageCanvas.height = img.height;
       ctx.drawImage(img, 0, 0);
       return $scope.isCurrentPageDrawed = true;
     };
