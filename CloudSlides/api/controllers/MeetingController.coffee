@@ -119,7 +119,7 @@ module.exports =
     meetingId = req.param('meetingId');
     pageId = req.param('pageId');
 
-    sails.log('updatePage ' + meetingId+' '+pageId);
+    sails.log('updatePage ' + meetingId + ' ' + pageId);
 
     Meeting.message(meetingId, {pageId: pageId});
 
