@@ -1,5 +1,5 @@
 angular.module 'navbarCtrl', ['User']
-.controller 'navbarCtrl', ($scope, $location, $rootScope, User)->
+.controller 'navbarCtrl', ($scope, $location, $rootScope, $state, User)->
   init = ()->
     $scope.isLogined = User.isLogined();
     $scope.userLoginInfo = if $scope.isLogined then User.getLoginInfo() else undefined;
@@ -8,7 +8,8 @@ angular.module 'navbarCtrl', ['User']
   $scope.logout = ()->
     User.clearLoginInfo();
     $rootScope.$broadcast 'logout_success';
-    $location.url(''); # jump to welcome page
+    #    $location.url(''); # jump to welcome page
+    $state.go('welcome.index');
 
   $scope.$on 'login_success', ()->
     $scope.isLogined = true;

@@ -20,6 +20,11 @@ module.exports =
         status: 0
       );
 
+
+
+
+
+
 #删除会议
   delete: (req, res)->
     #取出变量
