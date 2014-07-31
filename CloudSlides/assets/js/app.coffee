@@ -1,9 +1,10 @@
 angular.module 'cs', [
+  # angular componet
   'angularFileUpload'
-  'ui.router'
+  'LocalStorageModule'
   'ngResource'
   'ngMessages'
-  'LocalStorageModule'
+  'ui.router'
 
   # controllers
   'navbarCtrl'

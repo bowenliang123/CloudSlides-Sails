@@ -36,36 +36,24 @@
                     <span><button class="btn btn-xs btn-warning" ng-click="refreshPptsData()">刷新数据</button></span></h3>
             </div>
 
+            <div class="panel panel-info" ng-repeat="ppt in ppts">
+                <div class="panel-heading">文件名：{{ppt.fileName}}</div>
+                <div class="panel-body">
+                    <ol class="breadcrumb">
+                        <li>幻灯ID：{{ppt.id}}</li>
+                        <li>页数：{{ppt.pageCount}}</li>
+                    </ol>
+                    <ol class="breadcrumb">
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>幻灯ID</th>
-                    <th>文件名</th>
-                    <th>文件大小</th>
-                    <th>页数</th>
-                    <th>上传时间</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="ppt in ppts">
-                    <td>{{ppt.id}}</td>
-                    <td>{{ppt.fileName}}</td>
-                    <td>{{ppt.size}}</td>
-                    <td>{{ppt.pageCount}}</td>
-                    <td>{{ppt.createdAt}}</td>
-                    <td>
-                        <div>
-                            <button class="btn btn-xs btn-block btn-success">发起会议</button>
-                        </div>
-                        <div>
-                            <button class="btn btn-xs btn-block btn-danger" ng-click="deletePpt(ppt.id)">删除</button>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        <li>大小：{{ppt.size}} B</li>
+                        <li>创建时间： {{ppt.createdAt}}</li>
+                    </ol>
+                    <div>
+                        <button class="btn btn-xs btn-success">发起会议</button>
+                        <button class="btn btn-xs btn-danger" ng-click="deletePpt(ppt.id)">删除</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
