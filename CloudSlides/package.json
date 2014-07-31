@@ -27,7 +27,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "debug": "node debug app.js"
+    "debug": "node debug app.js",
+    "deploy": "sudo node app.js --prod --port 80"
   },
   "main": "app.js",
   "repository": {
