@@ -128,10 +128,11 @@
       var pageCount, pptId;
       pptId = req.param('pptId');
       pageCount = req.param('pageCount');
+      sails.log('updateConvertStatus' + pptId + ' ' + pageCount);
       return Ppt.update({
         id: pptId
       }, {
-        pageCount: pageCount
+        pageCount: parseInt(pageCount)
       }).exec(function(err, updated) {
         if (err) {
           return res.serverError(err);

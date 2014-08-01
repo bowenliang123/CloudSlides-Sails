@@ -71,11 +71,11 @@ module.exports =
 # 获取PPT文件
   getPptFile: (req, res)->
     #取出变量
-    pptId=req.param('pptId');
+    pptId = req.param('pptId');
 
     Ppt.findOne
-      id:pptId
-    .exec (err,ppt)->
+      id: pptId
+    .exec (err, ppt)->
       if err
         return res.serverError(err)
 
@@ -84,7 +84,7 @@ module.exports =
 
       # 获取文件
       fs.readFile genPptFilePath(pptId, pptId)
-      ,(err, data)->
+      , (err, data)->
         if err
           sails.log('getImage error:')
           sails.log(err)
@@ -148,16 +148,18 @@ module.exports =
 
 
 #更新转换状态
-  updateConvertStatus: (req,res)->
+  updateConvertStatus: (req, res)->
     #取出变量
     pptId = req.param('pptId')
     pageCount = req.param('pageCount')
 
+    sails.log('updateConvertStatus' + pptId + ' ' + pageCount);
+
     #更改页码数
     Ppt.update
-      id:pptId
+      id: pptId
     ,
-      pageCount:pageCount
+      pageCount: parseInt(pageCount)
     .exec (err, updated)->
       if err
         return res.serverError(err);
@@ -166,7 +168,7 @@ module.exports =
         return res.notFound();
 
       return res.json
-        status:0
+        status: 0
 
 
 
