@@ -13,6 +13,7 @@ UserController
       var email, password;
       email = req.param('email');
       password = req.param('password');
+      sails.log('login with email: ' + email + ' password:' + password);
       return User.findOne({
         email: email,
         password: password

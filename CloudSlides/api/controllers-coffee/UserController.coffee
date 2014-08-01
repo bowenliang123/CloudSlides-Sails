@@ -11,25 +11,28 @@ module.exports =
     #提取变量
     email = req.param 'email'
     password = req.param 'password'
+
+    sails.log('login with email: ' + email + ' password:' + password)
+
     User.findOne
       email: email
       password: password
     .exec (err, user)->
-        return res.serverError err if err
+      return res.serverError err if err
 
-        if !user
-          return res.json
-            status: 101
-            data: 'user not found'
-        else
-          return res.json
-            status: 0
-            data:
-              user: user
-              token: '1234567890'
+      if !user
+        return res.json
+          status: 101
+          data: 'user not found'
+      else
+        return res.json
+          status: 0
+          data:
+            user: user
+            token: '1234567890'
 
-  #用户注册接口
-  signup: (req,res)->
+#用户注册接口
+  signup: (req, res)->
     #提取变量
     email = req.param("email")
     password = req.param("password")
@@ -45,6 +48,6 @@ module.exports =
         password: password
         name: name
       , (err, newuser)->
-          return res.json
-            status:0
-            user:newuser
+        return res.json
+          status: 0
+          user: newuser
