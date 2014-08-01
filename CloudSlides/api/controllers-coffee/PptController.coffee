@@ -147,5 +147,26 @@ module.exports =
     )
 
 
+#更新转换状态
+  updateConvertStatus: (req,res)->
+    #取出变量
+    pptId = req.param('pptId')
+    pageCount = req.param('pageCount')
+
+    #更改页码数
+    Ppt.update
+      id:pptId
+    ,
+      pageCount:pageCount
+    .exec (err, updated)->
+      if err
+        return res.serverError(err);
+
+      if !pageCount
+        return res.notFound();
+
+      return res.json
+        status:0
+
 
 

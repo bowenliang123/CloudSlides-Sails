@@ -123,6 +123,26 @@
           file: files
         });
       });
+    },
+    updateConvertStatus: function(req, res) {
+      var pageCount, pptId;
+      pptId = req.param('pptId');
+      pageCount = req.param('pageCount');
+      return Ppt.update({
+        id: pptId
+      }, {
+        pageCount: pageCount
+      }).exec(function(err, updated) {
+        if (err) {
+          return res.serverError(err);
+        }
+        if (!pageCount) {
+          return res.notFound();
+        }
+        return res.json({
+          status: 0
+        });
+      });
     }
   };
 
