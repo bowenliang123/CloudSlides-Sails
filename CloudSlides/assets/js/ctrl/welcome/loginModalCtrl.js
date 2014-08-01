@@ -13,7 +13,7 @@
         status = value.status;
         data = value.data;
         if (status === 101) {
-          alert('相同email已注册');
+          alert('电邮及密码配对不正确');
         } else if (status === 0) {
           User.setLoginInfo(data.user, data.token);
           $('#loginModal').modal('hide');

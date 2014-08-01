@@ -19,26 +19,28 @@
             </div>
 
             <!--页码指示器-->
-            <div class="pagination">
-                <ul>
-                    <li class="previous" ng-click="updatePageId(currentPageId-1)">
-                        <a class="fui-arrow-left"></a>
-                    </li>
+            <div class="center-block">
+                <div class="pagination ">
+                    <ul>
+                        <li class="previous" ng-click="updatePageId(currentPageId-1)">
+                            <a class="fui-arrow-left"></a>
+                        </li>
 
-                    <li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}" ng-click="updatePageId(index)">
-                        <a>{{index}}</a>
-                    </li>
+                        <li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}"
+                            ng-click="updatePageId(index)">
+                            <a>{{index}}</a>
+                        </li>
 
-                    <li class="next" ng-click="updatePageId(currentPageId+1)">
-                        <a class="fui-arrow-right"></a>
-                    </li>
-                </ul>
+                        <li class="next" ng-click="updatePageId(currentPageId+1)">
+                            <a class="fui-arrow-right"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <!--画板-->
-            <div class="control_canvas_wrapper">
-                <!--<canvas drawing width="720" height="540" id="pageCanvas"></canvas>-->
-                <canvas drawing  id="pageCanvas"></canvas>
+            <div class="col-sm-12">
+                <canvas drawing id="pageCanvas"></canvas>
             </div>
         </div>
 
@@ -47,7 +49,8 @@
 
     <div hidden>
         <div ng-repeat="index in pageRange">
-            <img ng-src="/ppt/getImage?pptId={{meeting.ppt.id}}&pageId={{index}}" pageid="{{index}}" id="page{{index}}" onloadnotify/>
+            <img ng-src="/ppt/getImage?pptId={{meeting.ppt.id}}&pageId={{index}}" pageid="{{index}}" id="page{{index}}"
+                 onloadnotify/>
         </div>
     </div>
 </div>

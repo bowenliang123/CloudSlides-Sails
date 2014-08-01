@@ -29,8 +29,8 @@
             </div>
 
             <!--画板-->
-            <div class="control_canvas_wrapper">
-                <canvas drawing width="720" height="540" id="pageCanvas"></canvas>
+            <div class="col-sm-12">
+                <canvas width="720" height="540" id="pageCanvas"></canvas>
             </div>
         </div>
 
@@ -39,7 +39,8 @@
 
     <div hidden>
         <div ng-repeat="index in pageRange">
-            <img ng-src="/ppt/getImage?pptId={{meeting.ppt.id}}&pageId={{index}}" pageid="{{index}}" id="page{{index}}" onloadnotify/>
+            <img ng-src="/ppt/getImage?pptId={{meeting.ppt.id}}&pageId={{index}}" pageid="{{index}}" id="page{{index}}"
+                 onloadnotify/>
         </div>
     </div>
 </div>

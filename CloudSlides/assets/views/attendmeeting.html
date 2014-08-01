@@ -14,43 +14,58 @@
                 <h3>我参加的会议
                     <small> 共有{{attendMeetings.length}}个会议</small>
                 </h3>
+
+                <div>
+                    <button class="btn btn-info" ng-click="showModalAttendMeeting()">加入观看会议</button>
+                    <button class="btn btn-success" ng-click="refreshMeetingData()">刷新会议数据</button>
+                </div>
             </div>
 
-            <div>
-                <button class="btn btn-info" ng-click="showModalAttendMeeting()">加入观看会议</button>
-                <button class="btn btn-success" ng-click="refreshMeetingData()">刷新会议数据</button>
-            </div>
+            <div class="panel panel-default" ng-repeat="meeting in attendMeetings">
+                <div class="panel-body">
 
+                    <form class="form-horizontal" role="form">
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>主题</th>
-                    <th>发起人</th>
-                    <th>观看人数</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="meeting in attendMeetings">
-                    <td>{{meeting.id}}</td>
-                    <td>{{meeting.topic}}</td>
-                    <td>
-                        <div>{{meeting.holder.name}}</div>
-                        <div>({{meeting.holder.email}})</div>
-                    </td>
-                    <td>{{meeting.attendees.length}}</td>
-                    <td>
-                        <div><a class="btn btn-xs btn-success" href="#/watch/{{meeting.id}}">观看会议</a></div>
-                        <div>
-                            <button class="btn btn-xs btn-danger" ng-click="quitAttendMeeting(meeting.id)">退出会议</button>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="fui-arrow-right"></span>&nbsp;会议ID:
+                            </label>
+
+                            <div class="col-sm-9">
+                                <p class="form-control-static">{{meeting.id}}</p>
+                            </div>
                         </div>
 
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="fui-chat"></span>&nbsp;主题:
+                            </label>
+
+                            <div class="col-sm-9">
+                                <p class="form-control-static">{{meeting.topic}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="fui-chat"></span>&nbsp;发起人:
+                            </label>
+
+                            <div class="col-sm-9">
+                                <p class="form-control-static">{{meeting.holder.name}} ({{meeting.holder.email}})</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <a class="btn btn-sm btn-success" href="#/watch/{{meeting.id}}">观看会议</a>
+
+                            <button class="btn btn-sm btn-danger" ng-click="quitAttendMeeting(meeting.id)">退出会议</button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
 
         </div>
     </div>

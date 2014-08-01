@@ -15,54 +15,68 @@
                 <h3>我发起的会议
                     <small> 共有{{holdMeetings.length}}个会议</small>
                 </h3>
+                <div>
+                    <button class="btn btn-info" ng-click="showModalHoldNewMeeting()">发起会议</button>
+                    <button class="btn btn-success" ng-click="refreshMeetingData()">刷新会议数据</button>
+                </div>
             </div>
 
-            <!--<div class="panel panel-default">-->
-            <!--<div class="panel-body">-->
-            <div>
-                <button class="btn btn-info" ng-click="showModalHoldNewMeeting()">发起会议</button>
-                <button class="btn btn-success" ng-click="refreshMeetingData()">刷新会议数据</button>
-            </div>
-            <!--</div>-->
-            <!--</div>-->
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>会议ID</th>
-                    <th>主题</th>
-                    <th>对应幻灯</th>
-                    <th>发起人</th>
-                    <th>观看人数</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="meeting in holdMeetings">
-                    <td>{{meeting.id}}</td>
-                    <td>{{meeting.topic}}</td>
-                    <td>
-                        <div>(# {{meeting.ppt.id}})</div>
-                        <div>{{meeting.ppt.fileName}}
-                        </div>
-                    </td>
-                    <td>{{meeting.holder.name}}</td>
-                    <td>{{meeting.attendees.length}}</td>
-                    <td>
-                        <div>
-                            <div>
-                                <a class="btn btn-xs btn-block btn-success" href="#/control/{{meeting.id}}">控制会议</a>
+            <div class="panel panel-default" ng-repeat="meeting in holdMeetings">
+                <div class="panel-body">
+
+                    <form class="form-horizontal" role="form">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="fui-arrow-right"></span>&nbsp;会议ID:
+                            </label>
+
+                            <div class="col-sm-9">
+                                <p class="form-control-static">{{meeting.id}}</p>
                             </div>
                         </div>
-                        <div>
-                            <button class="btn btn-xs btn-block btn-danger"
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="fui-chat"></span>&nbsp;主题:
+                            </label>
+
+                            <div class="col-sm-9">
+                                <p class="form-control-static">{{meeting.topic}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="fui-calendar-solid"></span>&nbsp;对应幻灯:
+                            </label>
+
+                            <div class="col-sm-9">
+                                <p class="form-control-static">({{meeting.ppt.id}}) {{meeting.ppt.fileName}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="fui-user"></span>&nbsp;观看人数:
+                            </label>
+
+                            <div class="col-sm-9">
+                                <p class="form-control-static">{{meeting.attendees.length}}</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-9 col-sm-offset-3">
+                            <a class="btn btn-sm btn-success" href="#/control/{{meeting.id}}">控制会议</a>
+                            <button class="btn btn-sm btn-danger"
                                     ng-click="deleteHoldMeeting(meeting.id)">删除
                             </button>
                         </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+
+                    </form>
+                </div>
+            </div>
 
         </div>
     </div>

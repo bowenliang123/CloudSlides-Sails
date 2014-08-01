@@ -4,7 +4,7 @@
     return {
       restrict: "A",
       link: function(scope, element, attrs) {
-        var ctx, draw, drawing, lastX, lastY, reset;
+        var ctx, draw, drawing, lastX, lastY, onDown, onMove, onUp, reset;
         reset = function() {
           element[0].width = element[0].width;
         };
@@ -21,7 +21,7 @@
         drawing = false;
         lastX = void 0;
         lastY = void 0;
-        element.bind("mousedown", function(event) {
+        onDown = function(event) {
           if (event.offsetX !== undefined) {
             lastX = event.offsetX;
             lastY = event.offsetY;
@@ -30,9 +30,9 @@
             lastY = event.layerY - event.currentTarget.offsetTop;
           }
           ctx.beginPath();
-          drawing = true;
-        });
-        element.bind("mousemove", function(event) {
+          return drawing = true;
+        };
+        onMove = function(event) {
           var currentX, currentY;
           if (drawing) {
             if (event.offsetX !== undefined) {
@@ -44,11 +44,29 @@
             }
             draw(lastX, lastY, currentX, currentY);
             lastX = currentX;
-            lastY = currentY;
+            return lastY = currentY;
           }
+        };
+        onUp = function(event) {
+          return drawing = false;
+        };
+        element.bind("mousedown", function(event) {
+          onDown(event);
+        });
+        element.bind("mousemove", function(event) {
+          onMove(event);
         });
         element.bind("mouseup", function(event) {
-          drawing = false;
+          onUp(event);
+        });
+        element.bind("touchstart", function(event) {
+          onDown(event);
+        });
+        element.bind("touchmove", function(event) {
+          onMove(event);
+        });
+        element.bind("touchend", function(event) {
+          onUp(event);
         });
       }
     };

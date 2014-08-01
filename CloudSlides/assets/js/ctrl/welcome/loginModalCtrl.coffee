@@ -21,8 +21,8 @@ angular.module 'welcome.loginModalCtrl', ['User']
         data = value.data;
 
         if status == 101
-          #相同email已注册
-          alert('相同email已注册')
+          #电邮及密码配对不正确
+          alert('电邮及密码配对不正确')
           return
 
         else if status == 0

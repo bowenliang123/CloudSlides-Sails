@@ -1,4 +1,4 @@
-angular.module 'drawing',[]
+angular.module 'drawing', []
 .directive "drawing", ->
   restrict: "A"
   link: (scope, element, attrs) ->
@@ -20,7 +20,10 @@ angular.module 'drawing',[]
     reset = ->
       element[0].width = element[0].width
       return
-    draw = (lX, lY, cX, cY, color="#4bf") ->
+
+
+    #methods
+    draw = (lX, lY, cX, cY, color = "#4bf") ->
 
       # line from
       ctx.moveTo lX, lY
@@ -34,11 +37,15 @@ angular.module 'drawing',[]
       # draw it
       ctx.stroke()
       return
+
+
     ctx = element[0].getContext("2d")
     drawing = false
     lastX = undefined
     lastY = undefined
-    element.bind "mousedown", (event) ->
+
+
+    onDown = (event)->
       if event.offsetX isnt `undefined`
         lastX = event.offsetX
         lastY = event.offsetY
@@ -47,9 +54,8 @@ angular.module 'drawing',[]
         lastY = event.layerY - event.currentTarget.offsetTop
       ctx.beginPath()
       drawing = true
-      return
 
-    element.bind "mousemove", (event) ->
+    onMove = (event)->
       if drawing
         if event.offsetX isnt `undefined`
           currentX = event.offsetX
@@ -60,18 +66,41 @@ angular.module 'drawing',[]
         draw lastX, lastY, currentX, currentY
         lastX = currentX
         lastY = currentY
+
+    onUp = (event)->
+      drawing = false
+
+    element.bind "mousedown", (event) ->
+      onDown(event)
+      return
+
+    element.bind "mousemove", (event) ->
+      onMove(event)
       return
 
     element.bind "mouseup", (event) ->
-      drawing = false
+      onUp(event)
       return
 
 
-#    scope.$watch attrs.pageId, (pageId)->
-#      console.log(pageId);
-#      img = new Image();
-#      img.src=imageUrl;
-#      img.onload = ()->
-#      ctx.drawImage($('#page'+pageId),0,0);
+    element.bind "touchstart", (event) ->
+      onDown(event)
+      return
+
+    element.bind "touchmove", (event) ->
+      onMove(event)
+      return
+
+    element.bind "touchend", (event) ->
+      onUp(event)
+      return
+
+
+    #    scope.$watch attrs.pageId, (pageId)->
+    #      console.log(pageId);
+    #      img = new Image();
+    #      img.src=imageUrl;
+    #      img.onload = ()->
+    #      ctx.drawImage($('#page'+pageId),0,0);
 
     return
