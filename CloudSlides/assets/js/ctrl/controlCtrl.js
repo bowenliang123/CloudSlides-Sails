@@ -3,14 +3,23 @@
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   angular.module('controlCtrl', ['User', 'Meeting']).controller('controlCtrl', function($scope, $stateParams, $timeout, $rootScope, User, Meeting) {
-    var ctx, drawPageImage, init, pageCanvas;
-    pageCanvas = document.getElementById('pageCanvas');
-    ctx = pageCanvas.getContext("2d");
+    var drawPageImage, init;
+    $scope.currentPageId = 1;
     drawPageImage = function(pageId) {
-      var img;
+      var canvasWrapperWidth, ctx, hgtWidRate, img, pageCanvas, scaleRate;
+      pageCanvas = document.getElementById('pageCanvas');
+      ctx = pageCanvas.getContext("2d");
+      canvasWrapperWidth = $('#canvas-wrapper').width();
       img = document.getElementById('page' + pageId);
-      pageCanvas.width = img.width;
-      pageCanvas.height = img.height;
+      hgtWidRate = img.height / img.width;
+      if (img.width > canvasWrapperWidth) {
+        pageCanvas.width = canvasWrapperWidth;
+      } else {
+        pageCanvas.width = img.width;
+      }
+      pageCanvas.height = pageCanvas.width * hgtWidRate;
+      scaleRate = pageCanvas.width / img.width;
+      ctx.scale(scaleRate, scaleRate);
       ctx.drawImage(img, 0, 0);
       return $scope.isCurrentPageDrawed = true;
     };
@@ -21,6 +30,10 @@
       $scope.isCurrentPageDrawed = false;
       return $scope.refreshMeetingData($scope.meetingId);
     };
+    $(window).on('resize', function(e) {
+      console.log($scope.currentPageId);
+      return drawPageImage($scope.currentPageId);
+    });
     $scope.$on('meeting_data_loaded', function() {
       $scope.maxPageId = $scope.meeting.ppt.pageCount;
       $scope.readyPageImagesId = [];
@@ -50,6 +63,7 @@
       });
     };
     $scope.updatePageId = function(pageId) {
+      $scope.currentPageId = pageId;
       if (pageId < 1 || pageId > $scope.maxPageId) {
 
       } else {

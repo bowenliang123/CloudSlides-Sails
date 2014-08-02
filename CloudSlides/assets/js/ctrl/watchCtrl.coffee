@@ -6,15 +6,30 @@ angular.module 'watchCtrl', ['User', 'Meeting']
 
   #绘制页码图片
   drawPageImage = (pageId)->
+    pageCanvas = document.getElementById('pageCanvas')
+    ctx = pageCanvas.getContext("2d")
+    canvasWrapperWidth = $('#canvas-wrapper').width()
+
     #获取对应image对象
     img = document.getElementById('page' + pageId)
 
-    #根据图像大小调整canvas画布大小
-    pageCanvas.width = img.width
-    pageCanvas.height = img.height
+    #根据图像大小和画布总尺寸调整canvas画布大小
+    hgtWidRate = img.height / img.width
+
+    if img.width > canvasWrapperWidth
+      pageCanvas.width = canvasWrapperWidth
+    else
+      pageCanvas.width = img.width
+
+    pageCanvas.height = pageCanvas.width * hgtWidRate
+
+    # 缩放画布大小
+    scaleRate = pageCanvas.width / img.width
+    ctx.scale(scaleRate, scaleRate)
 
     #将图形绘入canvas
     ctx.drawImage(img, 0, 0)
+
     # 已绘制
     $scope.isCurrentPageDrawed = true
 
@@ -28,6 +43,12 @@ angular.module 'watchCtrl', ['User', 'Meeting']
     initSubscribe($scope.meetingId)
 
   #公有函数
+
+  #监听窗口大小变化
+  $(window).on('resize', (e)->
+    console.log($scope.currentPageId)
+    drawPageImage($scope.currentPageId)
+  )
 
   #监听会议数据加载完成消息
   $scope.$on 'meeting_data_loaded', ()->

@@ -5,10 +5,20 @@
     pageCanvas = document.getElementById('pageCanvas');
     ctx = pageCanvas.getContext("2d");
     drawPageImage = function(pageId) {
-      var img;
+      var canvasWrapperWidth, hgtWidRate, img, scaleRate;
+      pageCanvas = document.getElementById('pageCanvas');
+      ctx = pageCanvas.getContext("2d");
+      canvasWrapperWidth = $('#canvas-wrapper').width();
       img = document.getElementById('page' + pageId);
-      pageCanvas.width = img.width;
-      pageCanvas.height = img.height;
+      hgtWidRate = img.height / img.width;
+      if (img.width > canvasWrapperWidth) {
+        pageCanvas.width = canvasWrapperWidth;
+      } else {
+        pageCanvas.width = img.width;
+      }
+      pageCanvas.height = pageCanvas.width * hgtWidRate;
+      scaleRate = pageCanvas.width / img.width;
+      ctx.scale(scaleRate, scaleRate);
       ctx.drawImage(img, 0, 0);
       return $scope.isCurrentPageDrawed = true;
     };
@@ -20,6 +30,10 @@
       $scope.refreshMeetingData($scope.meetingId);
       return initSubscribe($scope.meetingId);
     };
+    $(window).on('resize', function(e) {
+      console.log($scope.currentPageId);
+      return drawPageImage($scope.currentPageId);
+    });
     $scope.$on('meeting_data_loaded', function() {
       $scope.maxPageId = $scope.meeting.ppt.pageCount;
       $scope.readyPageImagesId = [];
