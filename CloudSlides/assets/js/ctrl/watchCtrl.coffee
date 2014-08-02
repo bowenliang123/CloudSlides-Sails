@@ -1,22 +1,17 @@
 angular.module 'watchCtrl', ['User', 'Meeting']
 .controller 'watchCtrl', ($scope, $rootScope, $stateParams, User, Meeting)->
-  #私有变量
-#  pageCanvas = document.getElementById('pageCanvas')
-#  ctx = pageCanvas.getContext("2d")
-  $scope.scaleRate = 1
-
   # 私有函数
 
-  #绘制页码图片
+  # 绘制页码图片
   drawPageImage = (pageId)->
     pageCanvas = document.getElementById('pageCanvas')
     ctx = pageCanvas.getContext("2d")
     canvasWrapperWidth = $('#canvas-wrapper').width()
 
-    #获取对应image对象
+    # 获取对应image对象
     img = document.getElementById('page' + pageId)
 
-    #根据图像大小和画布总尺寸调整canvas画布大小
+    # 根据图像大小和画布总尺寸调整canvas画布大小
     hgtWidRate = img.height / img.width
 
     if img.width > canvasWrapperWidth
@@ -27,36 +22,29 @@ angular.module 'watchCtrl', ['User', 'Meeting']
     pageCanvas.height = pageCanvas.width * hgtWidRate
 
     # 缩放画布大小
-    scaleRate = pageCanvas.width / img.width
-    ctx.scale(scaleRate, scaleRate)
+    $scope.scaleRate = pageCanvas.width / img.width
+    ctx.scale($scope.scaleRate, $scope.scaleRate)
 
-    #将图形绘入canvas
+    # 将图形绘入canvas
     ctx.drawImage(img, 0, 0)
 
     # 已绘制
     $scope.isCurrentPageDrawed = true
 
-    $scope.scaleRate = scaleRate
-    console.log 'pageCanvas.width' + pageCanvas.width
-    console.log 'img.width' + img.width
-    console.log('scaleRate' + scaleRate)
 
-
+  # 画布绘线
   drawLine = (linePath, lineColor = '#4bf', lineWidth = 6)->
-    console.log($scope.scaleRate)
     pageCanvas = document.getElementById('pageCanvas')
     ctx = pageCanvas.getContext("2d")
     ctx.beginPath()
     lastX = linePath[0]
     lastY = linePath[1]
     ctx.moveTo(lastX, lastY)
-    for i in [2.. linePath.length-1] by 2
+    for i in [2.. linePath.length - 1] by 2
       do (i)->
         currentX = lastX + linePath[i]
         currentY = lastY + linePath[i + 1]
         ctx.lineTo(currentX, currentY)
-        #        console.log 'A ' + currentX + '~' + currentY
-        #        console.log('B ' + currentX * $scope.scaleRate + '-' + currentY * $scope.scaleRate)
         lastX = currentX
         lastY = currentY
     ctx.lineWidth = lineWidth
@@ -70,17 +58,19 @@ angular.module 'watchCtrl', ['User', 'Meeting']
     $scope.currentPageId = 1 #默认显示第一页
     $scope.maxPageId = 1
     $scope.isCurrentPageDrawed = false # 当前页码未绘图
+    $scope.scaleRate = 1 # canvas画布缩放比例
     $scope.refreshMeetingData($scope.meetingId)
     initSubscribe($scope.meetingId)
 
-  #公有函数
 
-  #监听窗口大小变化
+  # 公有函数
+
+  # 监听窗口大小变化
   $(window).on('resize', (e)->
     drawPageImage($scope.currentPageId)
   )
 
-  #监听会议数据加载完成消息
+  # 监听会议数据加载完成消息
   $scope.$on 'meeting_data_loaded', ()->
     $scope.maxPageId = $scope.meeting.ppt.pageCount
     # 开始监听图片加载完成消息
@@ -92,7 +82,7 @@ angular.module 'watchCtrl', ['User', 'Meeting']
       if pageId == $scope.currentPageId and !$scope.isCurrentPageDrawed
         drawPageImage(pageId)
 
-  #刷新数据
+  # 刷新数据
   $scope.refreshMeetingData = (meetingId)->
     console.log('refreshMeetingData')
     $scope.meeting = {}
@@ -123,11 +113,10 @@ angular.module 'watchCtrl', ['User', 'Meeting']
   $scope.$on 'drawLine', (event, line)->
     drawLine(line.path, line.color, line.width)
 
-  #订阅会议实时消息
+  # 订阅会议实时消息
   initSubscribe = (meetingId)->
     io.socket.on 'meeting', (obj)->
       if obj.verb is 'messaged'
-        console.log(obj)
         if obj.data.type == 'updatePage'
           pageId = parseInt(obj.data.pageId)
           $rootScope.$broadcast('updatePage', pageId)
@@ -137,8 +126,10 @@ angular.module 'watchCtrl', ['User', 'Meeting']
             $rootScope.$broadcast 'drawLine', line
             return
 
-    #订阅
-    io.socket.get('/meeting/subscribeWatch', {meetingId: meetingId})
+    # 订阅当前会议
+    io.socket.get('/meeting/subscribeWatch',
+      meetingId: meetingId
+    )
 
     return true
 

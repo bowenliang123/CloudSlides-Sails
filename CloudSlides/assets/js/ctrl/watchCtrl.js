@@ -2,9 +2,8 @@
 (function() {
   angular.module('watchCtrl', ['User', 'Meeting']).controller('watchCtrl', function($scope, $rootScope, $stateParams, User, Meeting) {
     var drawLine, drawPageImage, init, initSubscribe;
-    $scope.scaleRate = 1;
     drawPageImage = function(pageId) {
-      var canvasWrapperWidth, ctx, hgtWidRate, img, pageCanvas, scaleRate;
+      var canvasWrapperWidth, ctx, hgtWidRate, img, pageCanvas;
       pageCanvas = document.getElementById('pageCanvas');
       ctx = pageCanvas.getContext("2d");
       canvasWrapperWidth = $('#canvas-wrapper').width();
@@ -16,14 +15,10 @@
         pageCanvas.width = img.width;
       }
       pageCanvas.height = pageCanvas.width * hgtWidRate;
-      scaleRate = pageCanvas.width / img.width;
-      ctx.scale(scaleRate, scaleRate);
+      $scope.scaleRate = pageCanvas.width / img.width;
+      ctx.scale($scope.scaleRate, $scope.scaleRate);
       ctx.drawImage(img, 0, 0);
-      $scope.isCurrentPageDrawed = true;
-      $scope.scaleRate = scaleRate;
-      console.log('pageCanvas.width' + pageCanvas.width);
-      console.log('img.width' + img.width);
-      return console.log('scaleRate' + scaleRate);
+      return $scope.isCurrentPageDrawed = true;
     };
     drawLine = function(linePath, lineColor, lineWidth) {
       var ctx, i, lastX, lastY, pageCanvas, _fn, _i, _ref;
@@ -33,7 +28,6 @@
       if (lineWidth == null) {
         lineWidth = 6;
       }
-      console.log($scope.scaleRate);
       pageCanvas = document.getElementById('pageCanvas');
       ctx = pageCanvas.getContext("2d");
       ctx.beginPath();
@@ -60,6 +54,7 @@
       $scope.currentPageId = 1;
       $scope.maxPageId = 1;
       $scope.isCurrentPageDrawed = false;
+      $scope.scaleRate = 1;
       $scope.refreshMeetingData($scope.meetingId);
       return initSubscribe($scope.meetingId);
     };
@@ -106,7 +101,6 @@
       io.socket.on('meeting', function(obj) {
         var line, pageId;
         if (obj.verb === 'messaged') {
-          console.log(obj);
           if (obj.data.type === 'updatePage') {
             pageId = parseInt(obj.data.pageId);
             return $rootScope.$broadcast('updatePage', pageId);
