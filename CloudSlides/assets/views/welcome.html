@@ -1,7 +1,6 @@
 <div ng-controller="welcomeCtrl">
 
 
-
     <!--app logo and motto-->
     <div class="welcome-applogo"></div>
     <h1 class="welcome-headline">CloudSlides</h1>
@@ -12,7 +11,8 @@
     </p>
     <!--/app logo and motto-->
 
-    <div class="row welcome-main-buttons">
+
+    <div class="row welcome-main-buttons" ng-if="!isLogined">
         <div class="col-sm-2 col-sm-offset-4">
             <button class="btn btn-success btn-block" data-toggle="modal" data-target="#loginModal">
                 登录
@@ -22,6 +22,14 @@
             <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#signupModal">
                 注册
             </button>
+        </div>
+    </div>
+
+    <div class="row welcome-main-buttons" ng-if="isLogined">
+        <div class="col-sm-4 col-sm-offset-4">
+            <a href="#/myppt" class="btn btn-success btn-block btn-hg">
+                进入我的云幻灯
+            </a>
         </div>
     </div>
 
@@ -64,6 +72,16 @@
             </div>
         </div>
     </div>
+
+    <blockquote class="blockquote-reverse">
+        <p>
+            <small>2013-2014年香港数码港粤港ICT青年创业计划CCMF创意微型基金资助</small>
+        </p>
+
+        <p>
+            <small>2013年中国谷歌Android大学生挑战赛全国总决赛获奖作品</small>
+        </p>
+    </blockquote>
 
 
     <!-- Login Modal -->
