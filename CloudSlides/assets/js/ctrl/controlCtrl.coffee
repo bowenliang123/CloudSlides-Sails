@@ -90,12 +90,11 @@ angular.module 'controlCtrl', ['User', 'Meeting']
     )
 
   $scope.updatePageId = (pageId)->
-    $scope.currentPageId = pageId
+
     if pageId < 1 or pageId > $scope.maxPageId
       return
     else
-      $scope.currentPageId = pageId;
-
+      $scope.currentPageId = pageId
 
       #发送页码更新请求
       io.socket.post('/meeting/updatePage',

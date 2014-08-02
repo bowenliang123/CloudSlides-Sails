@@ -66,7 +66,6 @@
       });
     };
     $scope.updatePageId = function(pageId) {
-      $scope.currentPageId = pageId;
       if (pageId < 1 || pageId > $scope.maxPageId) {
 
       } else {
