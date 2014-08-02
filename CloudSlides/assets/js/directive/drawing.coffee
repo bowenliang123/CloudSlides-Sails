@@ -55,15 +55,17 @@ angular.module 'drawing', []
     # console.log('canvas_scale_rate_changed: ' + scaleRate)
 
     onDown = (event)->
-      if event.offsetX isnt `undefined`
-        lastX = event.offsetX
-        lastY = event.offsetY
-      else
-        lastX = event.layerX - event.currentTarget.offsetLeft
-        lastY = event.layerY - event.currentTarget.offsetTop
+#      if event.offsetX isnt `undefined`
+#        lastX = event.offsetX
+#        lastY = event.offsetY
+#      else
+#        lastX = event.layerX - event.currentTarget.offsetLeft
+#        lastY = event.layerY - event.currentTarget.offsetTop
+      lastX = event.offsetX
+      lastY = event.offsetY
       ctx.beginPath()
       drawing = true
-#      console.log('ondown ' + lastX + ' ' + lastY)
+      #      console.log('ondown ' + lastX + ' ' + lastY)
       linePath = [lastX, lastY]
 
     onMove = (event)->
@@ -77,7 +79,7 @@ angular.module 'drawing', []
         draw lastX, lastY, currentX, currentY, color, width
 
         linePath.push(currentX - lastX, currentY - lastY);
-#        linePath.push(lastX, lastY);
+        #        linePath.push(lastX, lastY);
         lastX = currentX
         lastY = currentY
 
@@ -113,24 +115,33 @@ angular.module 'drawing', []
 
     # 绑定触摸事件
 
-    #    element.bind "touchstart", (event) ->
-    #      onDown(event)
-    #      return
-    #
-    #    element.bind "touchmove", (event) ->
-    #      onMove(event)
-    #      return
-    #
-    #    element.bind "touchend", (event) ->
-    #      onUp(event)
-    #      return
+    element.bind "touchstart", (event) ->
+      console.log(event)
+      lastX = event.targetTouches[0].pageX + event.layerX
+      lastY = event.targetTouches[0].pageY + event.layerY
+      ctx.beginPath()
+      drawing = true
+      console.log('touchstart ' + lastX + ' ' + lastY + ' ' + document.getElementById("pageCanvas").offsetLeft + ' ' + document.getElementById("pageCanvas").offsetLeft)
+      linePath = [lastX, lastY]
+      return
 
+    element.bind "touchmove", (event) ->
+      #阻止屏幕滑动
+      event.preventDefault()
 
-    #    scope.$watch attrs.pageId, (pageId)->
-    #      console.log(pageId);
-    #      img = new Image();
-    #      img.src=imageUrl;
-    #      img.onload = ()->
-    #      ctx.drawImage($('#page'+pageId),0,0);
+      if drawing
+        currentX = event.targetTouches[0].pageX + event.layerX
+        currentY = event.targetTouches[0].pageY + event.layerY
+        draw lastX, lastY, currentX, currentY, color, width
+
+        linePath.push(currentX - lastX, currentY - lastY);
+        #        linePath.push(lastX, lastY);
+        lastX = currentX
+        lastY = currentY
+      return
+
+    element.bind "touchend", (event) ->
+      onUp(event)
+      return
 
     return

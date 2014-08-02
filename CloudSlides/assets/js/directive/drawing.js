@@ -33,13 +33,8 @@
           return scaleRate = newScaleRate;
         });
         onDown = function(event) {
-          if (event.offsetX !== undefined) {
-            lastX = event.offsetX;
-            lastY = event.offsetY;
-          } else {
-            lastX = event.layerX - event.currentTarget.offsetLeft;
-            lastY = event.layerY - event.currentTarget.offsetTop;
-          }
+          lastX = event.offsetX;
+          lastY = event.offsetY;
           ctx.beginPath();
           drawing = true;
           return linePath = [lastX, lastY];
@@ -86,6 +81,30 @@
           onMove(event);
         });
         element.bind("mouseup", function(event) {
+          onUp(event);
+        });
+        element.bind("touchstart", function(event) {
+          console.log(event);
+          lastX = event.targetTouches[0].pageX + event.layerX;
+          lastY = event.targetTouches[0].pageY + event.layerY;
+          ctx.beginPath();
+          drawing = true;
+          console.log('touchstart ' + lastX + ' ' + lastY + ' ' + document.getElementById("pageCanvas").offsetLeft + ' ' + document.getElementById("pageCanvas").offsetLeft);
+          linePath = [lastX, lastY];
+        });
+        element.bind("touchmove", function(event) {
+          var currentX, currentY;
+          event.preventDefault();
+          if (drawing) {
+            currentX = event.targetTouches[0].pageX + event.layerX;
+            currentY = event.targetTouches[0].pageY + event.layerY;
+            draw(lastX, lastY, currentX, currentY, color, width);
+            linePath.push(currentX - lastX, currentY - lastY);
+            lastX = currentX;
+            lastY = currentY;
+          }
+        });
+        element.bind("touchend", function(event) {
           onUp(event);
         });
       }
