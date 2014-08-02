@@ -4,7 +4,6 @@
 
   angular.module('controlCtrl', ['User', 'Meeting']).controller('controlCtrl', function($scope, $stateParams, $timeout, $rootScope, User, Meeting) {
     var drawPageImage, init;
-    $scope.currentPageId = 1;
     drawPageImage = function(pageId) {
       var canvasWrapperWidth, ctx, hgtWidRate, img, pageCanvas, scaleRate;
       pageCanvas = document.getElementById('pageCanvas');
@@ -12,16 +11,13 @@
       canvasWrapperWidth = $('#canvas-wrapper').width();
       img = document.getElementById('page' + pageId);
       hgtWidRate = img.height / img.width;
-      if (img.width > canvasWrapperWidth) {
-        pageCanvas.width = canvasWrapperWidth;
-      } else {
-        pageCanvas.width = img.width;
-      }
+      pageCanvas.width = img.width > canvasWrapperWidth ? canvasWrapperWidth : img.width;
       pageCanvas.height = pageCanvas.width * hgtWidRate;
       scaleRate = pageCanvas.width / img.width;
       ctx.scale(scaleRate, scaleRate);
       ctx.drawImage(img, 0, 0);
-      return $scope.isCurrentPageDrawed = true;
+      $scope.isCurrentPageDrawed = true;
+      return $rootScope.$broadcast('canvas_scale_rate_changed', scaleRate);
     };
     init = function() {
       $scope.meetingId = $stateParams.meetingId;
@@ -31,8 +27,15 @@
       return $scope.refreshMeetingData($scope.meetingId);
     };
     $(window).on('resize', function(e) {
-      console.log($scope.currentPageId);
       return drawPageImage($scope.currentPageId);
+    });
+    $scope.$on('draw_line', function(e, line) {
+      console.log('draw_line:' + line);
+      return io.socket.post('/meeting/drawLine', {
+        meetingId: $scope.meetingId,
+        pageId: $scope.currentPageId,
+        line: JSON.stringify(line)
+      });
     });
     $scope.$on('meeting_data_loaded', function() {
       $scope.maxPageId = $scope.meeting.ppt.pageCount;
@@ -44,7 +47,7 @@
         }
       });
     });
-    $scope.refreshMeetingData = function(meetingId) {
+    $scope.refreshMeetingData = function() {
       console.log('refreshMeetingData');
       $scope.meeting = {};
       return Meeting.get({

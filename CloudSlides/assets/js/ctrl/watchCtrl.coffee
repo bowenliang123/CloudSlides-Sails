@@ -1,8 +1,11 @@
 angular.module 'watchCtrl', ['User', 'Meeting']
 .controller 'watchCtrl', ($scope, $rootScope, $stateParams, User, Meeting)->
   #私有变量
-  pageCanvas = document.getElementById('pageCanvas')
-  ctx = pageCanvas.getContext("2d")
+#  pageCanvas = document.getElementById('pageCanvas')
+#  ctx = pageCanvas.getContext("2d")
+  $scope.scaleRate = 1
+
+  # 私有函数
 
   #绘制页码图片
   drawPageImage = (pageId)->
@@ -33,7 +36,35 @@ angular.module 'watchCtrl', ['User', 'Meeting']
     # 已绘制
     $scope.isCurrentPageDrawed = true
 
-  #私有函数
+    $scope.scaleRate = scaleRate
+    console.log 'pageCanvas.width' + pageCanvas.width
+    console.log 'img.width' + img.width
+    console.log('scaleRate' + scaleRate)
+
+
+  drawLine = (linePath, lineColor = '#4bf', lineWidth = 6)->
+    console.log($scope.scaleRate)
+    pageCanvas = document.getElementById('pageCanvas')
+    ctx = pageCanvas.getContext("2d")
+    ctx.beginPath()
+    lastX = linePath[0]
+    lastY = linePath[1]
+    ctx.moveTo(lastX, lastY)
+    for i in [2.. linePath.length-1] by 2
+      do (i)->
+        currentX = lastX + linePath[i]
+        currentY = lastY + linePath[i + 1]
+        ctx.lineTo(currentX, currentY)
+        #        console.log 'A ' + currentX + '~' + currentY
+        #        console.log('B ' + currentX * $scope.scaleRate + '-' + currentY * $scope.scaleRate)
+        lastX = currentX
+        lastY = currentY
+    ctx.lineWidth = lineWidth
+    ctx.strokeStyle = lineColor
+    ctx.stroke()
+
+
+  # 初始化
   init = ()->
     $scope.meetingId = $stateParams.meetingId
     $scope.currentPageId = 1 #默认显示第一页
@@ -46,7 +77,6 @@ angular.module 'watchCtrl', ['User', 'Meeting']
 
   #监听窗口大小变化
   $(window).on('resize', (e)->
-    console.log($scope.currentPageId)
     drawPageImage($scope.currentPageId)
   )
 
@@ -73,9 +103,9 @@ angular.module 'watchCtrl', ['User', 'Meeting']
       (value, responseHeaders)->
         $scope.meeting = value
         $scope.pageRange = [1..$scope.meeting.ppt.pageCount]
-#        for i in [1..$scope.meeting.ppt.pageCount]
-#          do (i)->
-#            $scope.pageRange.push(i)
+        #        for i in [1..$scope.meeting.ppt.pageCount]
+        #          do (i)->
+        #            $scope.pageRange.push(i)
 
         # 广播会议数据加载完成消息
         $rootScope.$broadcast('meeting_data_loaded')
@@ -85,18 +115,27 @@ angular.module 'watchCtrl', ['User', 'Meeting']
         console.log(httpResponse)
     )
 
-  $scope.$on 'updatePageId', (a, pageId)->
+  $scope.$on 'updatePage', (a, pageId)->
     $scope.currentPageId = pageId
     drawPageImage(pageId)
     $scope.$apply()
+
+  $scope.$on 'drawLine', (event, line)->
+    drawLine(line.path, line.color, line.width)
 
   #订阅会议实时消息
   initSubscribe = (meetingId)->
     io.socket.on 'meeting', (obj)->
       if obj.verb is 'messaged'
         console.log(obj)
-        pageId=parseInt(obj.data.pageId)
-        $rootScope.$broadcast('updatePageId', pageId)
+        if obj.data.type == 'updatePage'
+          pageId = parseInt(obj.data.pageId)
+          $rootScope.$broadcast('updatePage', pageId)
+        else
+          if obj.data.type == 'drawLine'
+            line = JSON.parse(obj.data.line)
+            $rootScope.$broadcast 'drawLine', line
+            return
 
     #订阅
     io.socket.get('/meeting/subscribeWatch', {meetingId: meetingId})

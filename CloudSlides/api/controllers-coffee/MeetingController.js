@@ -117,11 +117,28 @@
       pageId = req.param('pageId');
       sails.log('updatePage ' + meetingId + ' ' + pageId);
       Meeting.message(meetingId, {
+        type: 'updatePage',
         pageId: pageId
       });
       return res.ok({
         meetingId: meetingId,
         pageId: pageId
+      });
+    },
+    drawLine: function(req, res) {
+      var line, meetingId, pageId;
+      meetingId = req.param('meetingId');
+      pageId = req.param('pageId');
+      line = req.param('line');
+      Meeting.message(meetingId, {
+        type: 'drawLine',
+        pageId: pageId,
+        line: line
+      });
+      return res.ok({
+        meetingId: meetingId,
+        pageId: pageId,
+        line: line
       });
     }
   };

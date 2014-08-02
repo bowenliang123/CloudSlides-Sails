@@ -1,40 +1,36 @@
 angular.module 'controlCtrl', ['User', 'Meeting']
 .controller 'controlCtrl', ($scope, $stateParams, $timeout, $rootScope, User, Meeting)->
-  #私有变量
+  # 私有变量
+#  $scope.currentPageId = 1
 
-
-  $scope.currentPageId = 1
-
-  #绘制页码图片
+  # 绘制页码图片
   drawPageImage = (pageId)->
     pageCanvas = document.getElementById('pageCanvas')
     ctx = pageCanvas.getContext("2d")
     canvasWrapperWidth = $('#canvas-wrapper').width()
 
-    #获取对应image对象
+    # 获取对应image对象
     img = document.getElementById('page' + pageId)
 
-    #根据图像大小和画布总尺寸调整canvas画布大小
+    # 根据图像大小和画布总尺寸调整canvas画布大小
     hgtWidRate = img.height / img.width
-
-    if img.width > canvasWrapperWidth
-      pageCanvas.width = canvasWrapperWidth
-    else
-      pageCanvas.width = img.width
-
+    pageCanvas.width = if img.width > canvasWrapperWidth then canvasWrapperWidth else img.width
     pageCanvas.height = pageCanvas.width * hgtWidRate
 
     # 缩放画布大小
     scaleRate = pageCanvas.width / img.width
     ctx.scale(scaleRate, scaleRate)
 
-    #将图形绘入canvas
+    # 将图形绘入canvas
     ctx.drawImage(img, 0, 0)
 
     # 已绘制
     $scope.isCurrentPageDrawed = true
 
-  #私有函数
+    # 发送canvas缩放比例变化消息
+    $rootScope.$broadcast 'canvas_scale_rate_changed', scaleRate
+
+  # 私有函数
   init = ()->
     $scope.meetingId = $stateParams.meetingId #会议ID
     $scope.currentPageId = 1 #默认显示第一页
@@ -45,10 +41,18 @@ angular.module 'controlCtrl', ['User', 'Meeting']
   #公有函数
 
   #监听窗口大小变化
-  $(window).on('resize', (e)->
-    console.log($scope.currentPageId)
+  $(window).on 'resize', (e)->
     drawPageImage($scope.currentPageId)
-  )
+
+
+  $scope.$on 'draw_line', (e, line)->
+    console.log('draw_line:' + line);
+    #发送白板画线请求
+    io.socket.post('/meeting/drawLine',
+      meetingId: $scope.meetingId
+      pageId: $scope.currentPageId
+      line: JSON.stringify(line)
+    )
 
 
   #监听会议数据加载完成消息
@@ -66,7 +70,7 @@ angular.module 'controlCtrl', ['User', 'Meeting']
     return
 
   #刷新数据
-  $scope.refreshMeetingData = (meetingId)->
+  $scope.refreshMeetingData = ()->
     console.log('refreshMeetingData')
     $scope.meeting = {}
     Meeting.get(
