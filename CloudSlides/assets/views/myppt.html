@@ -39,18 +39,27 @@
             <div class="panel panel-info" ng-repeat="ppt in ppts">
                 <div class="panel-heading">文件名：{{ppt.fileName}}</div>
                 <div class="panel-body">
-                    <ol class="breadcrumb">
-                        <li>幻灯ID：{{ppt.id}}</li>
-                        <li>页数：{{ppt.pageCount}}</li>
-                    </ol>
-                    <ol class="breadcrumb">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img ng-src="/ppt/getImage?pageId=1&pptId={{ppt.id}}" ng-if="ppt.pageCount>0" class="img-thumbnail"/>
+                            <img src="images/unconverted-ppt.png" ng-if="ppt.pageCount==0" class="img-thumbnail"/>
+                        </div>
+                        <div class="col-sm-8">
+                            <ol class="breadcrumb">
+                                <li>幻灯ID：{{ppt.id}}</li>
+                                <li>页数：<span ng-if="ppt.pageCount>0">{{ppt.pageCount}}</span><span
+                                        ng-if="ppt.pageCount==0">正在转换</span></li>
+                            </ol>
+                            <ol class="breadcrumb">
 
-                        <li>大小：{{ppt.size}} B</li>
-                        <li>创建时间： {{ppt.createdAt}}</li>
-                    </ol>
-                    <div>
-                        <button class="btn btn-xs btn-success">发起会议</button>
-                        <button class="btn btn-xs btn-danger" ng-click="deletePpt(ppt.id)">删除</button>
+                                <li>大小：{{ppt.size}} B</li>
+                                <li>创建时间： {{ppt.createdAt}}</li>
+                            </ol>
+                            <div>
+                                <!--<button class="btn btn-xs btn-success">发起会议</button>-->
+                                <button class="btn btn-danger" ng-click="deletePpt(ppt.id)">删除</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
