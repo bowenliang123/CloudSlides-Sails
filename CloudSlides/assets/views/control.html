@@ -19,24 +19,65 @@
             </div>
 
             <!--页码指示器-->
-            <div class="center-block">
-                <div class="pagination ">
-                    <ul>
-                        <li class="previous" ng-click="updatePageId(currentPageId-1)">
-                            <a class="fui-arrow-left"></a>
-                        </li>
+            <div class="control-controlbar row">
 
-                        <li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}"
-                            ng-click="updatePageId(index)">
-                            <a>{{index}}</a>
+                <nav class="navbar navbar-default" role="navigation">
+                    <!-- Navbar content -->
+                    <ul class="nav navbar-nav">
+                        <li class="active" ng-click="updatePageId(currentPageId-1)">
+                            <a>&nbsp;<i class="fui-arrow-left"></i>&nbsp;上一页&nbsp;</a>
                         </li>
-
-                        <li class="next" ng-click="updatePageId(currentPageId+1)">
-                            <a class="fui-arrow-right"></a>
+                        <!--<li><a> / </a></li>-->
+                        <li><a>{{currentPageId}}</a></li>
+                        <li><a>/</a></li>
+                        <li><a>{{meeting.ppt.pageCount}}</a></li>
+                        <li class="active" ng-click="updatePageId(currentPageId+1)">
+                            <a>&nbsp;下一页&nbsp;<i class="fui-arrow-right"></i>&nbsp;</a>
                         </li>
                     </ul>
-                </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--清空当前页面-->
+                        <li ng-click="drawPageImage(currentPageId)"><a>清空</a></li>
+
+                        <!--同步白板笔触颜色选择-->
+                        <li class="dropdown" ng-show="isEnabledDrawing">
+                            <a class="dropdown-toggle" data-toggle="dropdown">{{lineColorSet[lineColor].text}}<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-class="{active: lineColor=='red'}"><a ng-click="lineColor='red'" dropdown-toggle>红色</a></li>
+                                <li ng-class="{active: lineColor=='blue'}"><a ng-click="lineColor='blue'" dropdown-toggle>蓝色</a></li>
+                            </ul>
+                        </li>
+
+                        <!--同步白板笔触粗细选择-->
+                        <li class="dropdown" ng-show="isEnabledDrawing">
+                            <a class="dropdown-toggle" data-toggle="dropdown">{{lineWidthSet[lineWidthType].text}}<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-class="{active: lineWidthType=='narrow'}"><a ng-click="lineWidthType='narrow'" dropdown-toggle>细笔</a></li>
+                                <li ng-class="{active: lineWidthType=='mid'}"><a ng-click="lineWidthType='mid'" dropdown-toggle>中笔</a></li>
+                                <li ng-class="{active: lineWidthType=='wide'}"><a ng-click="lineWidthType='wide'" dropdown-toggle>粗笔</a></li>
+                            </ul>
+                        </li>
+
+                        <!--同步白板开关-->
+                        <li class="dropdown" ng-show="isEnabledDrawing">
+                            <a class="dropdown-toggle" data-toggle="dropdown">同步白板 已开启<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a ng-click="isEnabledDrawing=false" dropdown-toggle>关闭同步白板</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" ng-show="!isEnabledDrawing">
+                            <a class="dropdown-toggle" data-toggle="dropdown">同步白板 已关闭<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a ng-click="isEnabledDrawing=true" dropdown-toggle>开启同步白板</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </nav>
             </div>
+
 
             <!--画板-->
             <div id="canvas-wrapper">

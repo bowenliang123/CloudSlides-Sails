@@ -11,12 +11,12 @@ angular.module 'mypptCtrl', ['User', 'Ppt', 'angularFileUpload']
       method: 'POST'
       headers: User.genAuthHeader()
     #withCredentials: true,
-      data: {
+      data:
         userId: User.getUserId()
         size: pptFile.size
         type: pptFile.type
         fileName: pptFile.name
-      }
+
       file: pptFile, #or list of files ($files) for html5 only
     #fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
     # customize file formData name ('Content-Desposition'), server side file variable name.
@@ -49,7 +49,6 @@ angular.module 'mypptCtrl', ['User', 'Ppt', 'angularFileUpload']
 
       #onSucess
       (value, responseHeaders)->
-        console.log(value);
         $scope.ppts = value;
     ,
       #onError
@@ -62,7 +61,7 @@ angular.module 'mypptCtrl', ['User', 'Ppt', 'angularFileUpload']
       #onSuccess
       (value, responseHeaders)->
         console.log(value);
-        if value.status==0
+        if value.status == 0
           alert('删除成功');
           $scope.refreshPptsData();
     ,

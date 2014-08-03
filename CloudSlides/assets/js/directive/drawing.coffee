@@ -27,8 +27,9 @@ angular.module 'drawing', []
     lastY = undefined
     linePath = []
     scaleRate = 1
-    color = "#4bf"
-    width = 5
+    isEnableDrawing = undefined
+    lineColorCode = undefined
+    lineWidth = undefined
 
     #methods
     draw = (lX, lY, cX, cY, color = "#4bf", width= 5) ->
@@ -52,7 +53,18 @@ angular.module 'drawing', []
     # 监听canvas缩放比例变化消息
     scope.$on 'canvas_scale_rate_changed', (event, newScaleRate)->
       scaleRate = newScaleRate
-    # console.log('canvas_scale_rate_changed: ' + scaleRate)
+
+    # 监听画板开关消息
+    scope.$on 'change_is_enabledrawing', (event, newIsEnableDrawing)->
+      isEnableDrawing = newIsEnableDrawing
+
+    # 监听画板线条颜色消息
+    scope.$on 'change_line_color', (event, newLineColorCode)->
+      lineColorCode = newLineColorCode
+
+    # 监听画板线条粗细消息
+    scope.$on 'change_line_width', (event, newLineWidth)->
+      lineWidth = newLineWidth
 
     onDown = (event)->
 #      if event.offsetX isnt `undefined`
@@ -61,6 +73,7 @@ angular.module 'drawing', []
 #      else
 #        lastX = event.layerX - event.currentTarget.offsetLeft
 #        lastY = event.layerY - event.currentTarget.offsetTop
+      if !isEnableDrawing then return
       lastX = event.offsetX
       lastY = event.offsetY
       ctx.beginPath()
@@ -76,10 +89,9 @@ angular.module 'drawing', []
         else
           currentX = event.layerX - event.currentTarget.offsetLeft
           currentY = event.layerY - event.currentTarget.offsetTop
-        draw lastX, lastY, currentX, currentY, color, width
+        draw lastX, lastY, currentX, currentY, lineColorCode, lineWidth
 
         linePath.push(currentX - lastX, currentY - lastY);
-        #        linePath.push(lastX, lastY);
         lastX = currentX
         lastY = currentY
 
@@ -90,14 +102,13 @@ angular.module 'drawing', []
         do (i)->
           newPath.push(linePath[i] / scaleRate)
 
-
       line =
         path: newPath
-        color: color
-        width: width
+        color: lineColorCode
+        width: lineWidth
       $rootScope.$broadcast 'draw_line', line
-      console.log(linePath);
-      console.log(newPath);
+    #      console.log(linePath);
+    #      console.log(newPath);
 
     # 绑定鼠标事件
 
@@ -121,7 +132,7 @@ angular.module 'drawing', []
       lastY = event.targetTouches[0].pageY + event.layerY
       ctx.beginPath()
       drawing = true
-      console.log('touchstart ' + lastX + ' ' + lastY + ' ' + document.getElementById("pageCanvas").offsetLeft + ' ' + document.getElementById("pageCanvas").offsetLeft)
+      console.log('touchstart ' + lastX + ' ' + lastY)
       linePath = [lastX, lastY]
       return
 

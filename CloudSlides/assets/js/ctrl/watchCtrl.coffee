@@ -1,5 +1,5 @@
 angular.module 'watchCtrl', ['User', 'Meeting']
-.controller 'watchCtrl', ($scope, $rootScope, $stateParams, User, Meeting)->
+.controller 'watchCtrl', ($scope, $stateParams, User, Meeting)->
   # 私有函数
 
   # 绘制页码图片
@@ -93,12 +93,9 @@ angular.module 'watchCtrl', ['User', 'Meeting']
       (value, responseHeaders)->
         $scope.meeting = value
         $scope.pageRange = [1..$scope.meeting.ppt.pageCount]
-        #        for i in [1..$scope.meeting.ppt.pageCount]
-        #          do (i)->
-        #            $scope.pageRange.push(i)
 
         # 广播会议数据加载完成消息
-        $rootScope.$broadcast('meeting_data_loaded')
+        $scope.$broadcast('meeting_data_loaded')
     ,
       #onError
       (httpResponse)->
@@ -119,11 +116,12 @@ angular.module 'watchCtrl', ['User', 'Meeting']
       if obj.verb is 'messaged'
         if obj.data.type == 'updatePage'
           pageId = parseInt(obj.data.pageId)
-          $rootScope.$broadcast('updatePage', pageId)
+          $scope.$broadcast('updatePage', pageId)
         else
           if obj.data.type == 'drawLine'
             line = JSON.parse(obj.data.line)
-            $rootScope.$broadcast 'drawLine', line
+            # console.log(line)
+            $scope.$broadcast 'drawLine', line
             return
 
     # 订阅当前会议

@@ -32,7 +32,6 @@
       return Ppt.query({
         owner: User.getUserId()
       }, function(value, responseHeaders) {
-        console.log(value);
         return $scope.ppts = value;
       }, function(httpResponse) {});
     };

@@ -1,7 +1,10 @@
 angular.module 'controlCtrl', ['User', 'Meeting']
-.controller 'controlCtrl', ($scope, $stateParams, $timeout, $rootScope, User, Meeting)->
+.controller 'controlCtrl', ($scope, $stateParams, $timeout, User, Meeting)->
   # 私有变量
 #  $scope.currentPageId = 1
+
+  $scope.drawPageImage = (pageId)->
+    drawPageImage(pageId)
 
   # 绘制页码图片
   drawPageImage = (pageId)->
@@ -28,7 +31,7 @@ angular.module 'controlCtrl', ['User', 'Meeting']
     $scope.isCurrentPageDrawed = true
 
     # 发送canvas缩放比例变化消息
-    $rootScope.$broadcast 'canvas_scale_rate_changed', scaleRate
+    $scope.$broadcast 'canvas_scale_rate_changed', scaleRate
 
   # 私有函数
   init = ()->
@@ -37,6 +40,28 @@ angular.module 'controlCtrl', ['User', 'Meeting']
     $scope.maxPageId = 1;
     $scope.isCurrentPageDrawed = false # 当前页码未绘图
     $scope.refreshMeetingData($scope.meetingId) #更新会议数据
+    $scope.isEnabledDrawing = true # 初始化开启白板
+    $scope.lineColor = 'blue'
+    $scope.lineColorSet =
+      blue:
+        colorCode: '#4bf'
+        text: '蓝色'
+      red:
+        colorCode: '#C0392B'
+        text: '红色'
+
+    $scope.lineWidthType = 'narrow'
+    $scope.lineWidthSet =
+      narrow:
+        width: 4
+        text: '细笔'
+      mid:
+        width: 7
+        text: '中笔'
+      wide:
+        width: 10
+        text: '粗笔'
+  #    $("[name='my-checkbox']").bootstrapSwitch();
 
   #公有函数
 
@@ -44,9 +69,25 @@ angular.module 'controlCtrl', ['User', 'Meeting']
   $(window).on 'resize', (e)->
     drawPageImage($scope.currentPageId)
 
+  # 监听同步画板是否开启
+  $scope.$watch 'isEnabledDrawing', (newValue, oldValue)->
+    # 发送画板开关变化的消息
+    $scope.$broadcast 'change_is_enabledrawing', newValue
 
+  # 监听同步画板线条颜色变化
+  $scope.$watch 'lineColor', (newValue, oldValue)->
+    # 发送画板颜色变化的消息
+    $scope.$broadcast 'change_line_color', $scope.lineColorSet[newValue].colorCode
+
+  # 监听同步画板线条粗细变化
+  $scope.$watch 'lineWidthType', (newValue, oldValue)->
+    console.log 'lineWidthType' + newValue
+    # 发送画板颜色变化的消息
+    $scope.$broadcast 'change_line_width', $scope.lineWidthSet[newValue].width
+
+  # 监听绘线事件
   $scope.$on 'draw_line', (e, line)->
-    console.log('draw_line:' + line);
+#    console.log('draw_line:' + line);
     #发送白板画线请求
     io.socket.post('/meeting/drawLine',
       meetingId: $scope.meetingId
@@ -82,7 +123,7 @@ angular.module 'controlCtrl', ['User', 'Meeting']
         $scope.pageRange = [1..$scope.meeting.ppt.pageCount];
 
         # 广播会议数据加载完成消息
-        $rootScope.$broadcast('meeting_data_loaded')
+        $scope.$broadcast('meeting_data_loaded')
     ,
       #onError
       (httpResponse)->
@@ -90,7 +131,6 @@ angular.module 'controlCtrl', ['User', 'Meeting']
     )
 
   $scope.updatePageId = (pageId)->
-
     if pageId < 1 or pageId > $scope.maxPageId
       return
     else

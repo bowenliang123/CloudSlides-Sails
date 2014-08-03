@@ -2,8 +2,11 @@
 (function() {
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  angular.module('controlCtrl', ['User', 'Meeting']).controller('controlCtrl', function($scope, $stateParams, $timeout, $rootScope, User, Meeting) {
+  angular.module('controlCtrl', ['User', 'Meeting']).controller('controlCtrl', function($scope, $stateParams, $timeout, User, Meeting) {
     var drawPageImage, init;
+    $scope.drawPageImage = function(pageId) {
+      return drawPageImage(pageId);
+    };
     drawPageImage = function(pageId) {
       var canvasWrapperWidth, ctx, hgtWidRate, img, pageCanvas, scaleRate;
       pageCanvas = document.getElementById('pageCanvas');
@@ -17,20 +20,56 @@
       ctx.scale(scaleRate, scaleRate);
       ctx.drawImage(img, 0, 0);
       $scope.isCurrentPageDrawed = true;
-      return $rootScope.$broadcast('canvas_scale_rate_changed', scaleRate);
+      return $scope.$broadcast('canvas_scale_rate_changed', scaleRate);
     };
     init = function() {
       $scope.meetingId = $stateParams.meetingId;
       $scope.currentPageId = 1;
       $scope.maxPageId = 1;
       $scope.isCurrentPageDrawed = false;
-      return $scope.refreshMeetingData($scope.meetingId);
+      $scope.refreshMeetingData($scope.meetingId);
+      $scope.isEnabledDrawing = true;
+      $scope.lineColor = 'blue';
+      $scope.lineColorSet = {
+        blue: {
+          colorCode: '#4bf',
+          text: '蓝色'
+        },
+        red: {
+          colorCode: '#C0392B',
+          text: '红色'
+        }
+      };
+      $scope.lineWidthType = 'narrow';
+      return $scope.lineWidthSet = {
+        narrow: {
+          width: 4,
+          text: '细笔'
+        },
+        mid: {
+          width: 7,
+          text: '中笔'
+        },
+        wide: {
+          width: 10,
+          text: '粗笔'
+        }
+      };
     };
     $(window).on('resize', function(e) {
       return drawPageImage($scope.currentPageId);
     });
+    $scope.$watch('isEnabledDrawing', function(newValue, oldValue) {
+      return $scope.$broadcast('change_is_enabledrawing', newValue);
+    });
+    $scope.$watch('lineColor', function(newValue, oldValue) {
+      return $scope.$broadcast('change_line_color', $scope.lineColorSet[newValue].colorCode);
+    });
+    $scope.$watch('lineWidthType', function(newValue, oldValue) {
+      console.log('lineWidthType' + newValue);
+      return $scope.$broadcast('change_line_width', $scope.lineWidthSet[newValue].width);
+    });
     $scope.$on('draw_line', function(e, line) {
-      console.log('draw_line:' + line);
       return io.socket.post('/meeting/drawLine', {
         meetingId: $scope.meetingId,
         pageId: $scope.currentPageId,
@@ -60,7 +99,7 @@
           for (var _i = 1, _ref = $scope.meeting.ppt.pageCount; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--){ _results.push(_i); }
           return _results;
         }).apply(this);
-        return $rootScope.$broadcast('meeting_data_loaded');
+        return $scope.$broadcast('meeting_data_loaded');
       }, function(httpResponse) {
         return console.log(httpResponse);
       });

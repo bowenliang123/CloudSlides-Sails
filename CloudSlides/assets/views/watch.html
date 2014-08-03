@@ -20,13 +20,23 @@
             </div>
 
             <!--页码指示器-->
-            <div class="pagination">
-                <ul>
-                    <li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}">
-                        <a>{{index}}</a>
-                    </li>
+            <!--<div class="pagination">-->
+            <!--<ul>-->
+            <!--<li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}">-->
+            <!--<a>{{index}}</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+
+            <nav class="navbar navbar-default" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li><a>当前页码</a></li>
+                    <li><a>{{currentPageId}}</a></li>
+                    <li><a>/</a></li>
+                    <li><a>{{meeting.ppt.pageCount}}</a></li>
+                    <li><a>总页数</a></li>
                 </ul>
-            </div>
+            </nav>
 
             <!--画板-->
             <div id="canvas-wrapper">

@@ -4,7 +4,7 @@
     return {
       restrict: "A",
       link: function(scope, element, attrs) {
-        var color, ctx, draw, drawing, lastX, lastY, linePath, onDown, onMove, onUp, reset, scaleRate, width;
+        var ctx, draw, drawing, isEnableDrawing, lastX, lastY, lineColorCode, linePath, lineWidth, onDown, onMove, onUp, reset, scaleRate;
         reset = function() {
           element[0].width = element[0].width;
         };
@@ -14,8 +14,9 @@
         lastY = void 0;
         linePath = [];
         scaleRate = 1;
-        color = "#4bf";
-        width = 5;
+        isEnableDrawing = void 0;
+        lineColorCode = void 0;
+        lineWidth = void 0;
         draw = function(lX, lY, cX, cY, color, width) {
           if (color == null) {
             color = "#4bf";
@@ -32,7 +33,19 @@
         scope.$on('canvas_scale_rate_changed', function(event, newScaleRate) {
           return scaleRate = newScaleRate;
         });
+        scope.$on('change_is_enabledrawing', function(event, newIsEnableDrawing) {
+          return isEnableDrawing = newIsEnableDrawing;
+        });
+        scope.$on('change_line_color', function(event, newLineColorCode) {
+          return lineColorCode = newLineColorCode;
+        });
+        scope.$on('change_line_width', function(event, newLineWidth) {
+          return lineWidth = newLineWidth;
+        });
         onDown = function(event) {
+          if (!isEnableDrawing) {
+            return;
+          }
           lastX = event.offsetX;
           lastY = event.offsetY;
           ctx.beginPath();
@@ -49,7 +62,7 @@
               currentX = event.layerX - event.currentTarget.offsetLeft;
               currentY = event.layerY - event.currentTarget.offsetTop;
             }
-            draw(lastX, lastY, currentX, currentY, color, width);
+            draw(lastX, lastY, currentX, currentY, lineColorCode, lineWidth);
             linePath.push(currentX - lastX, currentY - lastY);
             lastX = currentX;
             return lastY = currentY;
@@ -67,12 +80,10 @@
           }
           line = {
             path: newPath,
-            color: color,
-            width: width
+            color: lineColorCode,
+            width: lineWidth
           };
-          $rootScope.$broadcast('draw_line', line);
-          console.log(linePath);
-          return console.log(newPath);
+          return $rootScope.$broadcast('draw_line', line);
         };
         element.bind("mousedown", function(event) {
           onDown(event);
@@ -89,7 +100,7 @@
           lastY = event.targetTouches[0].pageY + event.layerY;
           ctx.beginPath();
           drawing = true;
-          console.log('touchstart ' + lastX + ' ' + lastY + ' ' + document.getElementById("pageCanvas").offsetLeft + ' ' + document.getElementById("pageCanvas").offsetLeft);
+          console.log('touchstart ' + lastX + ' ' + lastY);
           linePath = [lastX, lastY];
         });
         element.bind("touchmove", function(event) {
