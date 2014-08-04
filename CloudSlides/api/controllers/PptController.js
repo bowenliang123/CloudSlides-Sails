@@ -104,7 +104,6 @@
           return res.serverError(err);
         }
         res.set('Content-Type', 'image/jpeg');
-        res.header('Last-Modified', new Date().getTime());
         return res.send(new Buffer(data));
       });
     },

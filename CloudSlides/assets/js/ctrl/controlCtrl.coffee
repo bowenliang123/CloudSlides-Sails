@@ -2,7 +2,6 @@ angular.module 'controlCtrl', ['User', 'Meeting']
 .controller 'controlCtrl', ($scope, $stateParams, $timeout, User, Meeting)->
   # 私有变量
 #  $scope.currentPageId = 1
-
   $scope.drawPageImage = (pageId)->
     drawPageImage(pageId)
 
@@ -81,13 +80,11 @@ angular.module 'controlCtrl', ['User', 'Meeting']
 
   # 监听同步画板线条粗细变化
   $scope.$watch 'lineWidthType', (newValue, oldValue)->
-    console.log 'lineWidthType' + newValue
     # 发送画板颜色变化的消息
     $scope.$broadcast 'change_line_width', $scope.lineWidthSet[newValue].width
 
   # 监听绘线事件
   $scope.$on 'draw_line', (e, line)->
-#    console.log('draw_line:' + line);
     #发送白板画线请求
     io.socket.post('/meeting/drawLine',
       meetingId: $scope.meetingId

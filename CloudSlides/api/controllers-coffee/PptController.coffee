@@ -102,9 +102,8 @@ module.exports =
     pptId = req.param('pptId')
     pageId = req.param('pageId')
 
-    #    if_modified_since = req.header('If-Modified-Since')
-    #    if if_modified_since < new Date().getTime()
-    #      return res.status(304)
+    # if_modified_since = req.header('If-Modified-Since')
+
 
     fs.readFile(genImagePath(pptId, pageId),
     (err, data)->
@@ -120,7 +119,7 @@ module.exports =
 
       #获取文件成功，返回数据
       res.set('Content-Type', 'image/jpeg')
-      res.header('Last-Modified', new Date().getTime())
+      # res.header('Last-Modified', new Date().getTime())
       return res.send(new Buffer(data))
     )
 

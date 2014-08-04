@@ -66,7 +66,6 @@
       return $scope.$broadcast('change_line_color', $scope.lineColorSet[newValue].colorCode);
     });
     $scope.$watch('lineWidthType', function(newValue, oldValue) {
-      console.log('lineWidthType' + newValue);
       return $scope.$broadcast('change_line_width', $scope.lineWidthSet[newValue].width);
     });
     $scope.$on('draw_line', function(e, line) {
