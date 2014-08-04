@@ -15,7 +15,15 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
-  'styles/**/*.css'
+    //Bootstrap
+    'bower_components/bootstrap/dist/css/bootstrap.min.css',
+    'bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css',
+
+
+    //Flat UI
+    'lib/flat-ui-master/css/flat-ui.css',
+
+    'styles/**/*.css'
 ];
 
 
@@ -23,13 +31,36 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
-  // Dependencies like sails.io.js, jQuery, or Angular
-  // are brought in here
-  'js/dependencies/**/*.js',
+    //ng-file-upload
+    'bower_components/ng-file-upload/angular-file-upload-shim.min.js',
 
-  // All of the rest of your client-side js files
-  // will be injected here in no particular order.
-  'js/**/*.js'
+    //Angular
+    'bower_components/angular/angular.min.js',
+    'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+    'bower_components/angular-resource/angular-resource.min.js',
+    'bower_components/angular-messages/angular-messages.min.js',
+    'bower_components/angular-local-storage/angular-local-storage.min.js',
+    'bower_components/ng-file-upload/angular-file-upload.min.js',
+
+    //jquery
+    'bower_components/jquery/dist/jquery.min.js',
+
+    //Bootstrap
+    'bower_components/bootstrap/dist/js/bootstrap.min.js',
+
+
+    //other
+    'lib/flat-ui-master/js/flatui-checkbox.js',
+
+    //App
+
+    // Dependencies like sails.io.js, jQuery, or Angular
+    // are brought in here
+    'js/dependencies/**/*.js',
+
+    // All of the rest of your client-side js files
+    // will be injected here in no particular order.
+    'js/**/*.js'
 ];
 
 
@@ -43,20 +74,19 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+    'templates/**/*.html'
 ];
-
 
 
 // Prefix relative paths to source files so they point to the proper locations
 // (i.e. where the other Grunt tasks spit them out, or in some cases, where
 // they reside in the first place)
-module.exports.cssFilesToInject = cssFilesToInject.map(function(path) {
-  return '.tmp/public/' + path;
+module.exports.cssFilesToInject = cssFilesToInject.map(function (path) {
+    return '.tmp/public/' + path;
 });
-module.exports.jsFilesToInject = jsFilesToInject.map(function(path) {
-  return '.tmp/public/' + path;
+module.exports.jsFilesToInject = jsFilesToInject.map(function (path) {
+    return '.tmp/public/' + path;
 });
-module.exports.templateFilesToInject = templateFilesToInject.map(function(path) {
-  return 'assets/' + path;
+module.exports.templateFilesToInject = templateFilesToInject.map(function (path) {
+    return 'assets/' + path;
 });

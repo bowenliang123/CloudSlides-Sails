@@ -37,15 +37,22 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <!--清空当前页面-->
-                        <li ng-click="drawPageImage(currentPageId)"><a>清空</a></li>
+                        <li ng-click="drawPageImage(currentPageId)" ng-show="isEnabledDrawing">
+                            <a>清空</a>
+                        </li>
 
                         <!--同步白板笔触颜色选择-->
                         <li class="dropdown" ng-show="isEnabledDrawing">
-                            <a class="dropdown-toggle" data-toggle="dropdown">{{lineColorSet[lineColor].text}}<span
-                                    class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                {{lineColorSet[lineColor].text}}<span class="caret"></span>
+                            </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li ng-class="{active: lineColor=='red'}"><a ng-click="lineColor='red'" dropdown-toggle>红色</a></li>
-                                <li ng-class="{active: lineColor=='blue'}"><a ng-click="lineColor='blue'" dropdown-toggle>蓝色</a></li>
+                                <li ng-class="{active: lineColor=='red'}">
+                                    <a ng-click="lineColor='red'" dropdown-toggle>红色</a>
+                                </li>
+                                <li ng-class="{active: lineColor=='blue'}">
+                                    <a ng-click="lineColor='blue'" dropdown-toggle>蓝色</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -54,9 +61,15 @@
                             <a class="dropdown-toggle" data-toggle="dropdown">{{lineWidthSet[lineWidthType].text}}<span
                                     class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li ng-class="{active: lineWidthType=='narrow'}"><a ng-click="lineWidthType='narrow'" dropdown-toggle>细笔</a></li>
-                                <li ng-class="{active: lineWidthType=='mid'}"><a ng-click="lineWidthType='mid'" dropdown-toggle>中笔</a></li>
-                                <li ng-class="{active: lineWidthType=='wide'}"><a ng-click="lineWidthType='wide'" dropdown-toggle>粗笔</a></li>
+                                <li ng-class="{active: lineWidthType=='narrow'}">
+                                    <a ng-click="lineWidthType='narrow'" dropdown-toggle>细笔</a>
+                                </li>
+                                <li ng-class="{active: lineWidthType=='mid'}">
+                                    <a ng-click="lineWidthType='mid'" dropdown-toggle>中笔</a>
+                                </li>
+                                <li ng-class="{active: lineWidthType=='wide'}">
+                                    <a ng-click="lineWidthType='wide'" dropdown-toggle>粗笔</a>
+                                </li>
                             </ul>
                         </li>
 
