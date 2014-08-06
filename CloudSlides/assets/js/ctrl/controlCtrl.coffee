@@ -1,5 +1,5 @@
-angular.module 'controlCtrl', ['User', 'Meeting']
-.controller 'controlCtrl', ($scope, $stateParams, $timeout, User, Meeting)->
+angular.module 'controlCtrl', ['User', 'Meeting', 'UAService']
+.controller 'controlCtrl', ($scope, $stateParams, $timeout, UAService, User, Meeting)->
   # 私有变量
 #  $scope.currentPageId = 1
   $scope.drawPageImage = (pageId)->
@@ -37,6 +37,7 @@ angular.module 'controlCtrl', ['User', 'Meeting']
     $scope.meetingId = $stateParams.meetingId #会议ID
     $scope.currentPageId = 1 #默认显示第一页
     $scope.maxPageId = 1;
+    $scope.isDownGraded = UAService.isDownGraded()
     $scope.isCurrentPageDrawed = false # 当前页码未绘图
     $scope.refreshMeetingData($scope.meetingId) #更新会议数据
     $scope.isEnabledDrawing = true # 初始化开启白板

@@ -32,7 +32,7 @@ angular.module 'drawing', []
     lineWidth = undefined
 
     #methods
-    draw = (lX, lY, cX, cY, color = "#4bf", width= 5) ->
+    draw = (lX, lY, cX, cY, color = "#4bf", width = 5) ->
 
       # line from
       ctx.moveTo lX / scaleRate, lY / scaleRate
@@ -126,33 +126,35 @@ angular.module 'drawing', []
 
     # 绑定触摸事件
 
-    element.bind "touchstart", (event) ->
-      console.log(event)
-      lastX = event.targetTouches[0].pageX + event.layerX
-      lastY = event.targetTouches[0].pageY + event.layerY
-      ctx.beginPath()
-      drawing = true
-      console.log('touchstart ' + lastX + ' ' + lastY)
-      linePath = [lastX, lastY]
-      return
+    # !!!暂时不提供触摸画板功能
 
-    element.bind "touchmove", (event) ->
-      #阻止屏幕滑动
-      event.preventDefault()
-
-      if drawing
-        currentX = event.targetTouches[0].pageX + event.layerX
-        currentY = event.targetTouches[0].pageY + event.layerY
-        draw lastX, lastY, currentX, currentY, color, width
-
-        linePath.push(currentX - lastX, currentY - lastY);
-        #        linePath.push(lastX, lastY);
-        lastX = currentX
-        lastY = currentY
-      return
-
-    element.bind "touchend", (event) ->
-      onUp(event)
-      return
+    #    element.bind "touchstart", (event) ->
+    #      console.log(event)
+    #      lastX = event.targetTouches[0].pageX + event.layerX
+    #      lastY = event.targetTouches[0].pageY + event.layerY
+    #      ctx.beginPath()
+    #      drawing = true
+    #      console.log('touchstart ' + lastX + ' ' + lastY)
+    #      linePath = [lastX, lastY]
+    #      return
+    #
+    #    element.bind "touchmove", (event) ->
+    #      #阻止屏幕滑动
+    #      event.preventDefault()
+    #
+    #      if drawing
+    #        currentX = event.targetTouches[0].pageX + event.layerX
+    #        currentY = event.targetTouches[0].pageY + event.layerY
+    #        draw lastX, lastY, currentX, currentY, color, width
+    #
+    #        linePath.push(currentX - lastX, currentY - lastY);
+    #        #        linePath.push(lastX, lastY);
+    #        lastX = currentX
+    #        lastY = currentY
+    #      return
+    #
+    #    element.bind "touchend", (event) ->
+    #      onUp(event)
+    #      return
 
     return

@@ -94,30 +94,6 @@
         element.bind("mouseup", function(event) {
           onUp(event);
         });
-        element.bind("touchstart", function(event) {
-          console.log(event);
-          lastX = event.targetTouches[0].pageX + event.layerX;
-          lastY = event.targetTouches[0].pageY + event.layerY;
-          ctx.beginPath();
-          drawing = true;
-          console.log('touchstart ' + lastX + ' ' + lastY);
-          linePath = [lastX, lastY];
-        });
-        element.bind("touchmove", function(event) {
-          var currentX, currentY;
-          event.preventDefault();
-          if (drawing) {
-            currentX = event.targetTouches[0].pageX + event.layerX;
-            currentY = event.targetTouches[0].pageY + event.layerY;
-            draw(lastX, lastY, currentX, currentY, color, width);
-            linePath.push(currentX - lastX, currentY - lastY);
-            lastX = currentX;
-            lastY = currentY;
-          }
-        });
-        element.bind("touchend", function(event) {
-          onUp(event);
-        });
       }
     };
   });

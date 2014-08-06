@@ -19,38 +19,26 @@
                 </h3>
             </div>
 
-            <!--页码指示器-->
-            <!--<div class="pagination">-->
-            <!--<ul>-->
-            <!--<li ng-repeat="index in pageRange" ng-class="{active:currentPageId==index}">-->
-            <!--<a>{{index}}</a>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-
-            <nav class="navbar navbar-default" role="navigation">
-                <ul class="nav navbar-nav">
-                    <li><a>当前页码</a></li>
-                    <li><a>{{currentPageId}}</a></li>
-                    <li><a>/</a></li>
-                    <li><a>{{meeting.ppt.pageCount}}</a></li>
-                    <li><a>总页数</a></li>
-                </ul>
-            </nav>
+            <div class="row control-controlbar">
+                <div class="col-xs-4 text-center bg-info">当前页码</div>
+                <div class="col-xs-4 text-center bg-info">{{currentPageId}} / {{meeting.ppt.pageCount}}</div>
+                <div class="col-xs-4 text-center bg-info">总页数</div>
+            </div>
 
             <!--画板-->
-            <div id="canvas-wrapper">
+            <div id="canvas-wrapper" ng-show="!isDownGraded">
                 <canvas width="720" height="540" id="pageCanvas"></canvas>
             </div>
-        </div>
 
+            <div ng-show="isDownGraded">
+                <div ng-repeat="index in pageRange" ng-show="currentPageId==index">
+                    <img ng-src="/ppt/getImage?pptId={{meeting.ppt.id}}&pageId={{index}}" pageid="{{index}}"
+                         id="page{{index}}"
+                         class="img-responsive"
+                         onloadnotify/>
+                </div>
 
-    </div>
-
-    <div hidden>
-        <div ng-repeat="index in pageRange">
-            <img ng-src="/ppt/getImage?pptId={{meeting.ppt.id}}&pageId={{index}}" pageid="{{index}}" id="page{{index}}"
-                 onloadnotify/>
+            </div>
         </div>
     </div>
 </div>

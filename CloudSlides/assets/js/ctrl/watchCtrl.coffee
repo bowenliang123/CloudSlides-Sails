@@ -1,5 +1,5 @@
-angular.module 'watchCtrl', ['User', 'Meeting']
-.controller 'watchCtrl', ($scope, $stateParams, User, Meeting)->
+angular.module 'watchCtrl', ['User', 'Meeting', 'UAService']
+.controller 'watchCtrl', ($scope, $stateParams, UAService, User, Meeting)->
   # 私有函数
 
   # 绘制页码图片
@@ -59,6 +59,7 @@ angular.module 'watchCtrl', ['User', 'Meeting']
     $scope.maxPageId = 1
     $scope.isCurrentPageDrawed = false # 当前页码未绘图
     $scope.scaleRate = 1 # canvas画布缩放比例
+    $scope.isDownGraded = UAService.isDownGraded()
     $scope.refreshMeetingData($scope.meetingId)
     initSubscribe($scope.meetingId)
 

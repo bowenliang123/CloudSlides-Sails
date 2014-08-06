@@ -2,7 +2,7 @@
 (function() {
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  angular.module('controlCtrl', ['User', 'Meeting']).controller('controlCtrl', function($scope, $stateParams, $timeout, User, Meeting) {
+  angular.module('controlCtrl', ['User', 'Meeting', 'UAService']).controller('controlCtrl', function($scope, $stateParams, $timeout, UAService, User, Meeting) {
     var drawPageImage, init;
     $scope.drawPageImage = function(pageId) {
       return drawPageImage(pageId);
@@ -26,6 +26,7 @@
       $scope.meetingId = $stateParams.meetingId;
       $scope.currentPageId = 1;
       $scope.maxPageId = 1;
+      $scope.isDownGraded = UAService.isDownGraded();
       $scope.isCurrentPageDrawed = false;
       $scope.refreshMeetingData($scope.meetingId);
       $scope.isEnabledDrawing = true;

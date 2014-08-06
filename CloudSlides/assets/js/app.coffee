@@ -17,6 +17,9 @@ angular.module 'cs', [
   'controlCtrl'
   'watchCtrl'
 
+  # services
+  'UAService'
+
   # directives
   'drawing'
   'onloadnotify'
