@@ -5,6 +5,7 @@ angular.module 'cs', [
   'ngResource'
   'ngMessages'
   'ui.router'
+  'pascalprecht.translate'
 
   # controllers
   'navbarCtrl'
@@ -88,4 +89,6 @@ angular.module 'cs', [
   $urlRouterProvider.when('', '/welcome/index');
 
 
-
+# config angular-translate
+.config ($translateProvider)->
+  

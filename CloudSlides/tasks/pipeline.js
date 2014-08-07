@@ -41,6 +41,7 @@ var jsFilesToInject = [
     'bower_components/angular-messages/angular-messages.min.js',
     'bower_components/angular-local-storage/angular-local-storage.min.js',
     'bower_components/ng-file-upload/angular-file-upload.min.js',
+    'bower_components/angular-translate/angular-translate.min.js',
 
     //jquery
     'bower_components/jquery/dist/jquery.min.js',
