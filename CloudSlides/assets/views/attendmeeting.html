@@ -2,16 +2,31 @@
 <div class="container" ng-controller="attendmeetingCtrl">
     <div class="row">
         <!--侧导航栏-->
-        <ul class="col-sm-2 nav nav-pills nav-stacked">
-            <li><a href="#/myppt">{{'SIDE_BAR.NAV_MYPPT'|translate}}</a></li>
-            <li><a href="#/holdmeeting">{{'SIDE_BAR.NAV_HOLD'|translate}}</a></li>
-            <li class="active"><a href="#/attendmeeting">{{'SIDE_BAR.NAV_ATTEND'|translate}}</a></li>
+        <ul class="col-sm-3 nav nav-pills nav-stacked">
+            <li>
+                <a href="#/myppt">
+                    <span class="fui-heart"></span> &nbsp;
+                    {{'SIDE_BAR.NAV_MYPPT'|translate}}
+                </a>
+            </li>
+            <li>
+                <a href="#/holdmeeting">
+                    <span class="fui-cmd"></span> &nbsp;
+                    {{'SIDE_BAR.NAV_HOLD'|translate}}
+                </a>
+            </li>
+            <li class="active">
+                <a href="#/attendmeeting">
+                    <span class="fui-eye"></span>&nbsp;
+                    {{'SIDE_BAR.NAV_ATTEND'|translate}}
+                </a>
+            </li>
         </ul>
 
         <!--{{'ATTEND.'|translate}}-->
 
         <!--main content-->
-        <div class="col-sm-10">
+        <div class="col-sm-9">
             <!--我参加的会议列表-->
             <div class="page-header">
                 <h3>

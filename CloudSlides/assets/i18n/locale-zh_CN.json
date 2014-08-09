@@ -61,12 +61,12 @@
         "PAGE_SUBHEADER": "共有{{num}}个幻灯",
         "BTN_RELOAD_DATA": "刷新数据",
         "PPT": {
-            "FILENAME": "文件名：{{fileName}}",
-            "ID": "幻灯ID：{{id}}",
-            "PAGECOUNT": "页数：",
+            "FILENAME": "文件名{{fileName}}",
+            "ID": "幻灯ID{{id}}",
+            "PAGECOUNT": "页数",
             "CONVERTING": "正在转换",
-            "SIZE": "大小：{{size}} B",
-            "CREATE_TIME": "创建时间： {{time}}",
+            "SIZE": "大小{{size}} B",
+            "CREATE_TIME": "创建时间 {{time}}",
             "BTN_DELETE_PPT": "删除幻灯"
         }
     },
@@ -99,9 +99,9 @@
         "BTN_SHOW_MODAL_JOIN_MEETING": "加入观看会议",
         "BTN_REFRESH_MEETING_DATA": "刷新会议数据",
         "MEETING": {
-            "ID": "会议ID：",
-            "TOPIC": "主题：",
-            "HOLDER": "发起人：",
+            "ID": "会议ID",
+            "TOPIC": "主题",
+            "HOLDER": "发起人",
             "ATTENDEE_NUM": "观看人数"
         },
         "BTN_WATCH_MEETING": "进入同步观看会议",
