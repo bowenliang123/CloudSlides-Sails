@@ -1,0 +1,135 @@
+{
+    "NAV-BAR": {
+        "APP_TITLE": "CloudSlides",
+        "NAV_WELCOME": "Welcome",
+        "NAV_MYPPT": "My CloudSlides",
+        "BTN_LOGIN": "Login",
+        "BTN_SIGNUP": "Sign up",
+        "BTN_LOGOUT": "Logout",
+        "SAYHI": "Hi, {{username}} !",
+        "FOOTER_TEXT": "CloudSlides 云幻灯 2014 © Bowen Liang (simonlbw@gmail.com)"
+    },
+
+    "LOGIN_MODAL": {
+        "TITLE":"Login CloudSlides Account",
+        "BTN_LOGIN":"Login",
+        "MESSAGE":{
+            "PLEASE_INPUT_EMAIL":"Please input your email.",
+            "CHECK_EMAIL_FORMAT":"Please check your email format.",
+            "PLEASE_INPUT_PASSWORD":"Please input your password."
+        }
+    },
+
+    "SIGNUP_MODAL": {
+        "TITLE":"Sign up CloudSlides Account",
+        "BTN_SIGNUP":"Sign up"
+    },
+
+    "WELCOME": {
+        "APP_NAME": "CloudSlides",
+        "MOTTO": "make presentations anywhere",
+        "BTN_LOGIN": "Login",
+        "BTN_SIGNUP": "Signup",
+        "BTN_MYPPT": "Enter My CloudSlides",
+        "FUN1": {
+            "TITLE": "PPT Sync Displaying",
+            "DESCRIPTION": "Sync displaying presentation on phones, tablets and laptops"
+        },
+        "FUN2": {
+            "TITLE": "Real-time WhiteBroad",
+            "DESCRIPTION": "Draw things as other people see the same"
+        },
+        "FUN3": {
+            "TITLE": "PPT Converting and Storing",
+            "DESCRIPTION": "Presentation uploaded is free to be auto-converted and stored"
+        },
+        "QUOTE1": "proudly supported by HongKong CyberPort CCMF (Cyberport Creative Micro Fund)",
+        "QUOTE2": "prize winner of 2013 Google China Android College Student Challenge Competition"
+    },
+
+    "SIDE_BAR": {
+        "NAV_MYPPT": "My PPT",
+        "NAV_HOLD": "Hosted Meeting",
+        "NAV_ATTEND": "Joined Meeting",
+        "NAV_CONTROL": "Control Meeting",
+        "NAV_WATCH": "Watch Meeting"
+    },
+
+    "MYPPT": {
+        "BTN_CANCEL_UPLOAD": "Cancel Upload",
+        "PAGE_HEADER": "My Presentations",
+        "PAGE_SUBHEADER": "{{num}} presentations in total",
+        "BTN_RELOAD_DATA": "Refresh Data",
+        "PPT": {
+            "FILENAME": "FileName: {{fileName}}",
+            "ID": "PPT ID: {{id}}",
+            "PAGECOUNT": "PageCount:",
+            "CONVERTING": "converting",
+            "SIZE": "Size: {{size}} B",
+            "CREATE_TIME": "Uploaded at: {{time}}",
+            "BTN_DELETE_PPT": "Delete File"
+        }
+    },
+
+    "HOLD": {
+        "PAGE_HEADER": "My Hosted Meetings",
+        "PAGE_SUBHEADER": "{{num}} meetings in total",
+        "BTN_SHOW_MODAL_NEW_MEETING": "Launch New Meeting",
+        "BTN_REFRESH_MEETING_DATA": "Refresh Meeting Data",
+        "MEETING": {
+            "ID": "Meeting ID",
+            "TOPIC": "Topic",
+            "PPT": "PPT",
+            "ATTENDEE_NUM": "Attendees"
+        },
+        "BTN_CONTROL_MEETING": "Control Meeting",
+        "BTN_DELETE_MEETING": "Delete Meeting",
+        "MODAL_NEWMEETING": {
+            "TITLE": "Launch New Meeting",
+            "TOPIC": "Topic",
+            "CHOOSE_PPT": "Choose PPT Files to use:",
+            "BTN_CLOSE": "Back",
+            "BTN_LAUNCH_MEETING": "Launch New Meeting"
+        }
+    },
+
+    "ATTEND": {
+        "PAGE_HEADER": "My Joined Meeting",
+        "PAGE_SUBHEADER": "{{num}} meetings in total",
+        "BTN_SHOW_MODAL_JOIN_MEETING": "Join Meeting",
+        "BTN_REFRESH_MEETING_DATA": "Refresh Meeting Data",
+        "MEETING": {
+            "ID": "Meeting ID",
+            "TOPIC": "Topic",
+            "HOLDER": "Host",
+            "ATTENDEE_NUM": "Attendees"
+        },
+        "BTN_WATCH_MEETING": "Enter Watching Meeting",
+        "BTN_QUIT_MEETING": "Quit Meeting",
+        "MODAL_JOIN_MEETING": {
+            "TITLE": "Join Meeting",
+            "MEETING_ID": "Meeting ID:",
+            "BTN_CLOSE": "Back",
+            "BTN_JOIN_MEETING": "Join"
+        }
+    },
+
+    "CONTROL": {
+        "PAGE_HEADER": "Control Meeting - {{topic}}",
+        "PENBAR": {
+            "CLEAR": "Clear",
+            "ENABEL_SWTICH": {
+                "OPEN": "ON",
+                "CLOSE": "OFF",
+                "OPEN_ACTION": "Enable WhiteBroad",
+                "CLOSE_ACTION": "Disable WhiteBroad"
+            }
+        }
+    },
+
+    "WATCH": {
+        "PAGE_HEADER": "Watch Meeting - {{topic}}",
+        "CURRENT_PAGE": "Current Page",
+        "TOTAL_PAGES": "Total"
+    }
+}

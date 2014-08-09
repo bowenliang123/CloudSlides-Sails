@@ -1,0 +1,135 @@
+{
+    "NAV-BAR": {
+        "APP_TITLE": "CloudSlides雲幻燈",
+        "NAV_WELCOME": "歡迎",
+        "NAV_MYPPT": "我的雲幻燈",
+        "BTN_LOGIN": "登錄",
+        "BTN_SIGNUP": "註冊",
+        "BTN_LOGOUT": "登出",
+        "SAYHI": "Hi, {{username}} !",
+        "FOOTER_TEXT": "CloudSlides 雲幻燈 2014 © Bowen Liang 梁博文 作品"
+    },
+
+    "LOGIN_MODAL": {
+        "TITLE": "登錄 雲幻燈帳號",
+        "BTN_LOGIN": "登錄",
+        "MESSAGE": {
+            "PLEASE_INPUT_EMAIL": "請輸入電郵",
+            "CHECK_EMAIL_FORMAT": "請檢查電郵格式",
+            "PLEASE_INPUT_PASSWORD": "請輸入密碼"
+        }
+    },
+
+    "SIGNUP_MODAL": {
+        "TITLE": "註冊 雲幻燈帳號",
+        "BTN_SIGNUP": "註冊"
+    },
+
+    "WELCOME": {
+        "APP_NAME": "CloudSlides",
+        "MOTTO": "make presentations anywhere",
+        "BTN_LOGIN": "登錄",
+        "BTN_SIGNUP": "註冊",
+        "BTN_MYPPT": "進入我的雲幻燈",
+        "FUN1": {
+            "TITLE": "實時幻燈",
+            "DESCRIPTION": "跨終端同步顯示幻燈"
+        },
+        "FUN2": {
+            "TITLE": "同步白板",
+            "DESCRIPTION": "即畫即所見，幻燈可以隨意塗畫"
+        },
+        "FUN3": {
+            "TITLE": "幻燈轉碼",
+            "DESCRIPTION": "上傳幻燈，服務器自動轉碼保存"
+        },
+        "QUOTE1": "2013-2014年香港數碼港粵港ICT青年創業計劃CCMF創意微型基金資助",
+        "QUOTE2": "2013年Google中國Android大學生挑戰賽全國總決賽獲獎作品"
+    },
+
+    "SIDE_BAR": {
+        "NAV_MYPPT": "我的幻燈",
+        "NAV_HOLD": "我發起的會議",
+        "NAV_ATTEND": "我觀看的會議",
+        "NAV_CONTROL": "控制會議",
+        "NAV_WATCH": "觀看會議"
+    },
+
+    "MYPPT": {
+        "BTN_CANCEL_UPLOAD": "取消上傳",
+        "PAGE_HEADER": "我的幻燈",
+        "PAGE_SUBHEADER": "共有{{num}}個幻燈",
+        "BTN_RELOAD_DATA": "刷新數據",
+        "PPT": {
+            "FILENAME": "文件名{{fileName}}",
+            "ID": "幻燈ID{{id}}",
+            "PAGECOUNT": "頁數",
+            "CONVERTING": "正在轉換",
+            "SIZE": "大小 {{size}} B",
+            "CREATE_TIME": "上傳時間 {{time}}",
+            "BTN_DELETE_PPT": "刪除幻燈"
+        }
+    },
+
+    "HOLD": {
+        "PAGE_HEADER": "我發起的會議",
+        "PAGE_SUBHEADER": "共有{{num}}個會議",
+        "BTN_SHOW_MODAL_NEW_MEETING": "發起會議",
+        "BTN_REFRESH_MEETING_DATA": "刷新會議數據",
+        "MEETING": {
+            "ID": "會議編號ID",
+            "TOPIC": "會議主題",
+            "PPT": "所用幻燈",
+            "ATTENDEE_NUM": "觀看人數"
+        },
+        "BTN_CONTROL_MEETING": "進入會議操控",
+        "BTN_DELETE_MEETING": "刪除會議",
+        "MODAL_NEWMEETING": {
+            "TITLE": "發起會議",
+            "TOPIC": "會議主題",
+            "CHOOSE_PPT": "選擇PPT幻燈",
+            "BTN_CLOSE": "返回",
+            "BTN_LAUNCH_MEETING": "發起會議"
+        }
+    },
+
+    "ATTEND": {
+        "PAGE_HEADER": "我觀看的會議",
+        "PAGE_SUBHEADER": "共有{{num}}個會議",
+        "BTN_SHOW_MODAL_JOIN_MEETING": "加入觀看會議",
+        "BTN_REFRESH_MEETING_DATA": "刷新會議數據",
+        "MEETING": {
+            "ID": "會議編號",
+            "TOPIC": "主題",
+            "HOLDER": "發起人",
+            "ATTENDEE_NUM": "觀看人數"
+        },
+        "BTN_WATCH_MEETING": "進入同步觀看會議",
+        "BTN_QUIT_MEETING": "退出會議",
+        "MODAL_JOIN_MEETING": {
+            "TITLE": "加入觀看會議",
+            "MEETING_ID": "指定會議編號ID",
+            "BTN_CLOSE": "返回",
+            "BTN_JOIN_MEETING": "加入會議"
+        }
+    },
+
+    "CONTROL": {
+        "PAGE_HEADER": "控制會議 - {{topic}}",
+        "PENBAR": {
+            "CLEAR": "清空",
+            "ENABEL_SWTICH": {
+                "OPEN": "開啟",
+                "CLOSE": "關閉",
+                "OPEN_ACTION": "開啟同步畫板",
+                "CLOSE_ACTION": "關閉同步畫板"
+            }
+        }
+    },
+
+    "WATCH": {
+        "PAGE_HEADER": "觀看會議 - {{topic}}",
+        "CURRENT_PAGE": "當前頁",
+        "TOTAL_PAGES": "總頁數"
+    }
+}

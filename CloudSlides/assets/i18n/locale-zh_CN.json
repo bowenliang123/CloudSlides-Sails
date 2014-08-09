@@ -11,7 +11,7 @@
     },
 
     "LOGIN_MODAL": {
-        "TITLE":"登录云幻灯帐号",
+        "TITLE":"登录 云幻灯帐号",
         "BTN_LOGIN":"登录",
         "MESSAGE":{
             "PLEASE_INPUT_EMAIL":"请输入电邮地址",
@@ -21,7 +21,7 @@
     },
 
     "SIGNUP_MODAL": {
-        "TITLE":"注册云幻灯帐号",
+        "TITLE":"注册 云幻灯帐号",
         "BTN_SIGNUP":"注册"
     },
 

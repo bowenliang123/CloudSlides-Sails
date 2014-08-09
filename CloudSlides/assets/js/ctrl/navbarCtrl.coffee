@@ -21,3 +21,5 @@ angular.module 'navbarCtrl', ['User']
 
   # 初始化
   init();
+
+#  alert(navigator.language);

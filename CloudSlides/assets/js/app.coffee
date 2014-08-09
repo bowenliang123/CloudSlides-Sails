@@ -37,8 +37,16 @@ angular.module 'cs', [
     prefix: 'i18n/locale-'
     suffix: '.json'
   )
-  #  $translateProvider.preferredLanguage('en')
-  $translateProvider.determinePreferredLanguage()
+  .registerAvailableLanguageKeys ['zh_HK','en'],
+    'zh-HK': 'zh_TW',
+    'zh-SG': 'zh_TW',
+    'en_US': 'en',
+    'en_UK': 'en'
+
+  .fallbackLanguage('en')
+  .determinePreferredLanguage()
+#  .preferredLanguage('en')
+
 
 #  ui states config
 .config ($stateProvider)->
