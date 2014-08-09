@@ -34,26 +34,26 @@
       $scope.lineColorSet = {
         blue: {
           colorCode: '#4bf',
-          text: '蓝色'
+          text: 'Blue'
         },
         red: {
           colorCode: '#C0392B',
-          text: '红色'
+          text: 'Red'
         }
       };
       $scope.lineWidthType = 'narrow';
       return $scope.lineWidthSet = {
         narrow: {
           width: 4,
-          text: '细笔'
+          text: 'Fine'
         },
         mid: {
           width: 7,
-          text: '中笔'
+          text: 'Mid'
         },
         wide: {
           width: 10,
-          text: '粗笔'
+          text: 'Bold'
         }
       };
     };

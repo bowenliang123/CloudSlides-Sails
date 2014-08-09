@@ -31,6 +31,15 @@ angular.module 'cs', [
   'Meeting'
 ]
 
+# config angular-translate
+.config ($translateProvider)->
+  $translateProvider.useStaticFilesLoader(
+    prefix: 'i18n/locale-'
+    suffix: '.json'
+  )
+  #  $translateProvider.preferredLanguage('en')
+  $translateProvider.determinePreferredLanguage()
+
 #  ui states config
 .config ($stateProvider)->
   $stateProvider
@@ -89,6 +98,4 @@ angular.module 'cs', [
   $urlRouterProvider.when('', '/welcome/index');
 
 
-# config angular-translate
-.config ($translateProvider)->
-  
+

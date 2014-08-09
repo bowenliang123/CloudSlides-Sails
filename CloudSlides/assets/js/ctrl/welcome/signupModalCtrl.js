@@ -7,6 +7,9 @@
       password = $scope.signupPassword;
       passwordConfirm = $scope.signupPasswordConfirm;
       name = $scope.signupName;
+      if (!email || !password || !passwordConfirm || !name) {
+        return;
+      }
       if (password !== passwordConfirm) {
         alert('输入一致的密码！');
         return;

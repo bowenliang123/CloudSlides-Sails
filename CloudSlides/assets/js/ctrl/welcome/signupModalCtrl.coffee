@@ -9,8 +9,10 @@ angular.module 'welcome.signupModalCtrl', ['User']
     passwordConfirm = $scope.signupPasswordConfirm;
     name = $scope.signupName;
 
+    if !email or !password or !passwordConfirm or !name
+      return
 
-    #    验证密码和密码二次输入是否一致
+   #    验证密码和密码二次输入是否一致
     if (password != passwordConfirm)
       alert('输入一致的密码！');
       return;

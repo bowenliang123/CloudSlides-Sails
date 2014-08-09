@@ -24,12 +24,22 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
                 <span class="sr-only">Toggle navigation</span>
             </button>
-            <a class="navbar-brand" href="#">CloudSlides云幻灯</a>
+            <a class="navbar-brand" href="#">
+                {{'NAV-BAR.APP_TITLE'|translate}}
+            </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">欢迎</a></li>
-                <li><a href="#/myppt" ng-if="isLogined">我的云幻灯</a></li>
+                <li class="active">
+                    <a href="#">
+                        {{'NAV-BAR.NAV_WELCOME'|translate}}
+                    </a>
+                </li>
+                <li>
+                    <a href="#/myppt" ng-if="isLogined">
+                        {{'NAV-BAR.NAV_MYPPT'|translate}}
+                    </a>
+                </li>
             </ul>
 
 
@@ -37,19 +47,23 @@
             <div class="navbar-right" ng-if="!isLogined">
                 <button class="btn btn-success navbar-btn" type="button" data-toggle="modal"
                         data-target="#loginModal">
-                    登录
+                    {{'NAV-BAR.BTN_LOGIN'|translate}}
                 </button>
                 <button class="btn btn-primary navbar-btn" type="button" data-toggle="modal"
                         data-target="#signupModal">
-                    注册
+                    {{'NAV-BAR.BTN_SIGNUP'|translate}}
                 </button>
             </div>
 
             <!--用户信息 & 登出按钮-->
             <ul class="nav navbar-nav navbar-right" ng-if="isLogined">
-                <li><a href="#/myppt">Hi, {{userLoginInfo.user.name}}!</a></li>
+                <li><a href="#/myppt">
+                    {{'NAV-BAR.SAYHI'|translate:'{username: userLoginInfo.user.name}'}}
+                </a></li>
                 <li>
-                    <button class="btn navbar-btn btn-link" type="button" ng-click="logout()">登出</button>
+                    <button class="btn navbar-btn btn-link" type="button" ng-click="logout()">
+                        {{'NAV-BAR.BTN_LOGOUT'|translate}}
+                    </button>
                 </li>
             </ul>
         </div>
@@ -60,7 +74,7 @@
     <ui-view></ui-view>
 
     <div class="welcome-footer">
-        CloudSlides 云幻灯 2014 &copy; Bowen Liang 梁博文 作品
+        {{'NAV-BAR.FOOTER_TEXT'|translate}}
     </div>
 </div>
 

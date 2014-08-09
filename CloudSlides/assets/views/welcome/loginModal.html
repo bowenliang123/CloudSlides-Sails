@@ -6,8 +6,9 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span
                         aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="loginModalLabel">登入云幻灯帐号</h4>
+                <h4 class="modal-title" id="loginModalLabel">{{'LOGIN_MODAL.TITLE'|translate}}</h4>
             </div>
+            <!--{{'LOGIN_MODAL'|translate}}-->
             <div class="modal-body">
                 <form class="form-horizontal" role="form" name="loginForm">
 
@@ -20,7 +21,7 @@
                                    name="loginEmailInput"
                                    ng-model="loginEmail"
                                    required
-                                   />
+                                    />
                         </div>
                     </div>
 
@@ -43,16 +44,16 @@
                             <!--email input error-->
                             <div ng-messages="loginForm.loginEmailInput.$error">
                                 <div class="alert alert-success" role="alert" ng-message="required">
-                                    请输入电邮地址
+                                    {{'LOGIN_MODAL.MESSAGE.PLEASE_INPUT_EMAIL'|translate}}
                                 </div>
                                 <div class="alert alert-success" role="alert" ng-message="pattern">
-                                    请检查你的电邮格式
+                                    {{'LOGIN_MODAL.MESSAGE.CHECK_EMAIL_FORMAT'|translate}}
                                 </div>
                             </div>
                             <!--password input error-->
                             <div ng-messages="loginForm.loginPasswordInput.$error">
                                 <div class="alert alert-success" role="alert" ng-message="required">
-                                    请输入密码
+                                    {{'LOGIN_MODAL.MESSAGE.PLEASE_INPUT_PASSWORD'|translate}}
                                 </div>
                             </div>
                         </div>
@@ -61,8 +62,10 @@
             </div>
             <div class="modal-footer">
                 <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                <div class="col-sm-offset-4 col-sm-4">
-                    <button type="button" class="btn btn-success btn-block" ng-click="login()">登录</button>
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button type="button" class="btn btn-success btn-block" ng-click="login()">
+                        {{'LOGIN_MODAL.BTN_LOGIN'|translate}}
+                    </button>
                 </div>
             </div>
         </div>

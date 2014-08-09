@@ -1,23 +1,32 @@
+<!--suppress ALL -->
 <div class="container" ng-controller="attendmeetingCtrl">
     <div class="row">
         <!--侧导航栏-->
         <ul class="col-sm-2 nav nav-pills nav-stacked">
-            <li><a href="#/myppt">我的幻灯</a></li>
-            <li><a href="#/holdmeeting">我发起的会议</a></li>
-            <li class="active"><a href="#/attendmeeting">我参加的会议</a></li>
+            <li><a href="#/myppt">{{'SIDE_BAR.NAV_MYPPT'|translate}}</a></li>
+            <li><a href="#/holdmeeting">{{'SIDE_BAR.NAV_HOLD'|translate}}</a></li>
+            <li class="active"><a href="#/attendmeeting">{{'SIDE_BAR.NAV_ATTEND'|translate}}</a></li>
         </ul>
+
+        <!--{{'ATTEND.'|translate}}-->
 
         <!--main content-->
         <div class="col-sm-10">
             <!--我参加的会议列表-->
             <div class="page-header">
-                <h3>我参加的会议
-                    <small> 共有{{attendMeetings.length}}个会议</small>
+                <h3>
+                    {{'ATTEND.PAGE_HEADER'|translate}}
+
+                    <small> {{'ATTEND.PAGE_SUBHEADER'|translate:'{num:attendMeetings.length}'}}</small>
                 </h3>
 
                 <div>
-                    <button class="btn btn-info" ng-click="showModalAttendMeeting()">加入观看会议</button>
-                    <button class="btn btn-success" ng-click="refreshMeetingData()">刷新会议数据</button>
+                    <button class="btn btn-info" ng-click="showModalAttendMeeting()">
+                        {{'ATTEND.BTN_SHOW_MODAL_JOIN_MEETING'|translate}}
+                    </button>
+                    <button class="btn btn-success" ng-click="refreshMeetingData()">
+                        {{'ATTEND.BTN_REFRESH_MEETING_DATA'|translate}}
+                    </button>
                 </div>
             </div>
 
@@ -26,29 +35,41 @@
 
                     <dl class="dl-horizontal">
                         <dt>
-                            <span class="fui-arrow-right"></span>&nbsp;会议ID:
+                            {{'ATTEND.MEETING.ID'|translate}} &nbsp;
+                            <span class="fui-arrow-right"></span>
                         </dt>
                         <dd>{{meeting.id}}</dd>
 
                         <dt>
-                            <span class="fui-chat"></span>&nbsp;主题:
+                            {{'ATTEND.MEETING.TOPIC'|translate}} &nbsp;
+                            <span class="fui-chat"></span>
                         </dt>
                         <dd>{{meeting.topic}}</dd>
 
                         <dt>
-                            <span class="fui-chat"></span>&nbsp;发起人:
+                            {{'ATTEND.MEETING.HOLDER'|translate}} &nbsp;
+                            <span class="fui-user"></span>
                         </dt>
                         <dd>{{meeting.holder.name}} ({{meeting.holder.email}})</dd>
+
+                        <!--<dt>-->
+                        <!--<span class="fui-user"></span>-->
+                        <!--{{'HOLD.MEETING.ATTENDEE_NUM'|translate}}-->
+                        <!--</dt>-->
+                        <!--<dd>{{meeting.attendees.length}}</dd>-->
 
                     </dl>
 
                     <div class="col-sm-8 col-sm-offset-2">
                         <div class="btn-group btn-group-justified">
                             <div class="btn-group">
-                                <a class="btn btn-sm btn-success" href="#/watch/{{meeting.id}}">观看会议</a>
+                                <a class="btn btn-sm btn-success" href="#/watch/{{meeting.id}}">
+                                    {{'ATTEND.BTN_WATCH_MEETING'|translate}}
+                                </a>
                             </div>
                             <div class="btn-group">
-                                <button class="btn btn-sm btn-danger" ng-click="quitAttendMeeting(meeting.id)">退出会议
+                                <button class="btn btn-sm btn-danger" ng-click="quitAttendMeeting(meeting.id)">
+                                    {{'ATTEND.BTN_QUIT_MEETING'|translate}}
                                 </button>
                             </div>
                         </div>
@@ -68,16 +89,22 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span
                             aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">加入观看会议</h4>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{'ATTEND.MODAL_JOIN_MEETING.TITLE'|translate}}
+                    </h4>
                 </div>
                 <div class="modal-body">
-                    <h4>要加入的会议ID</h4>
-                    <input type="text" ng-model="attendNewMeetingId"/>
+                    <h4>{{'ATTEND.MODAL_JOIN_MEETING.MEETING_ID'|translate}}</h4>
+                    <input type="text" class="form-control" ng-model="attendNewMeetingId"/>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="attendNewMeeting()">加入</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{'ATTEND.MODAL_JOIN_MEETING.BTN_CLOSE'|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="attendNewMeeting()">
+                        {{'ATTEND.MODAL_JOIN_MEETING.BTN_JOIN_MEETING'|translate}}
+                    </button>
                 </div>
             </div>
         </div>

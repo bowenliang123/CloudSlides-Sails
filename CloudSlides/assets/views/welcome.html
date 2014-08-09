@@ -3,24 +3,28 @@
 
     <!--app logo and motto-->
     <div class="welcome-applogo"></div>
-    <h1 class="welcome-headline">CloudSlides</h1>
+    <h1 class="welcome-headline">
+        {{'WELCOME.APP_NAME'|translate}}
+    </h1>
 
 
     <p class="welcome-motto lead">
-        make presentations anywhere
+        {{'WELCOME.MOTTO'|translate}}
     </p>
     <!--/app logo and motto-->
 
 
+    <!--{{'WELCOME.'|translate}}-->
+
     <div class="row welcome-main-buttons" ng-if="!isLogined">
         <div class="col-sm-2 col-sm-offset-4">
             <button class="btn btn-success btn-block" data-toggle="modal" data-target="#loginModal">
-                登录
+                {{'WELCOME.BTN_LOGIN'|translate}}
             </button>
         </div>
         <div class="col-sm-2">
             <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#signupModal">
-                注册
+                {{'WELCOME.BTN_SIGNUP'|translate}}
             </button>
         </div>
     </div>
@@ -28,7 +32,7 @@
     <div class="row welcome-main-buttons" ng-if="isLogined">
         <div class="col-sm-4 col-sm-offset-4">
             <a href="#/myppt" class="btn btn-success btn-block btn-hg">
-                进入我的云幻灯
+                {{'WELCOME.BTN_MYPPT'|translate}}
             </a>
         </div>
     </div>
@@ -41,10 +45,10 @@
                 <img src="images/loop.svg" class="tile-image"/>
 
                 <h3 class="tile-title">
-                    实时幻灯
+                    {{'WELCOME.FUN1.TITLE'|translate}}
                 </h3>
 
-                <p>在不同终端同步显示幻灯</p>
+                <p>{{'WELCOME.FUN1.DESCRIPTION'|translate}}</p>
             </div>
         </div>
 
@@ -53,10 +57,10 @@
                 <img src="images/pencils.svg" class="tile-image"/>
 
                 <h3 class="tile-title">
-                    同步白板
+                    {{'WELCOME.FUN2.TITLE'|translate}}
                 </h3>
 
-                <p>即画即所见，幻灯可以随意涂画</p>
+                <p>{{'WELCOME.FUN2.DESCRIPTION'|translate}}</p>
             </div>
         </div>
 
@@ -65,21 +69,22 @@
                 <img src="images/book.svg" class="tile-image"/>
 
                 <h3 class="tile-title">
-                    幻灯转码
+                    {{'WELCOME.FUN3.TITLE'|translate}}
                 </h3>
 
-                <p>上传幻灯，服务器自动转码保存</p>
+                <p>{{'WELCOME.FUN3.DESCRIPTION'|translate}}</p>
             </div>
         </div>
     </div>
 
-    <blockquote class="blockquote-reverse">
+    <!--<blockquote class="blockquote-reverse">-->
+    <blockquote>
         <p>
-            <small>2013-2014年香港数码港粤港ICT青年创业计划CCMF创意微型基金资助</small>
+            <small>{{'WELCOME.QUOTE1'|translate}}</small>
         </p>
 
         <p>
-            <small>2013年中国谷歌Android大学生挑战赛全国总决赛获奖作品</small>
+            <small>{{'WELCOME.QUOTE2'|translate}}</small>
         </p>
     </blockquote>
 

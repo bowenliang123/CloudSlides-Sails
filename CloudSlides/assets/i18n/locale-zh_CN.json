@@ -1,0 +1,135 @@
+{
+    "NAV-BAR": {
+        "APP_TITLE": "CloudSlides云幻灯",
+        "NAV_WELCOME": "欢迎",
+        "NAV_MYPPT": "我的云幻灯",
+        "BTN_LOGIN": "登录",
+        "BTN_SIGNUP": "注册",
+        "BTN_LOGOUT": "登出",
+        "SAYHI": "Hi, {{username}} !",
+        "FOOTER_TEXT": "CloudSlides 云幻灯 2014 © Bowen Liang 梁博文 作品"
+    },
+
+    "LOGIN_MODAL": {
+        "TITLE":"登录云幻灯帐号",
+        "BTN_LOGIN":"登录",
+        "MESSAGE":{
+            "PLEASE_INPUT_EMAIL":"请输入电邮地址",
+            "CHECK_EMAIL_FORMAT":"请检查你的电邮地址格式",
+            "PLEASE_INPUT_PASSWORD":"请输入密码"
+        }
+    },
+
+    "SIGNUP_MODAL": {
+        "TITLE":"注册云幻灯帐号",
+        "BTN_SIGNUP":"注册"
+    },
+
+    "WELCOME": {
+        "APP_NAME": "CloudSlides",
+        "MOTTO": "make presentations anywhere",
+        "BTN_LOGIN": "登录",
+        "BTN_SIGNUP": "注册",
+        "BTN_MYPPT": "进入我的云幻灯",
+        "FUN1": {
+            "TITLE": "实时幻灯",
+            "DESCRIPTION": "在不同终端同步显示幻灯"
+        },
+        "FUN2": {
+            "TITLE": "同步白板",
+            "DESCRIPTION": "即画即所见，幻灯可以随意涂画"
+        },
+        "FUN3": {
+            "TITLE": "幻灯转码",
+            "DESCRIPTION": "上传幻灯，服务器自动转码保存"
+        },
+        "QUOTE1": "2013-2014年香港数码港粤港ICT青年创业计划CCMF创意微型基金资助",
+        "QUOTE2": "2013年Google中国Android大学生挑战赛全国总决赛获奖作品"
+    },
+
+    "SIDE_BAR": {
+        "NAV_MYPPT": "我的幻灯",
+        "NAV_HOLD": "我发起的会议",
+        "NAV_ATTEND": "我观看的会议",
+        "NAV_CONTROL": "控制会议",
+        "NAV_WATCH": "观看会议"
+    },
+
+    "MYPPT": {
+        "BTN_CANCEL_UPLOAD": "取消上传",
+        "PAGE_HEADER": "我的幻灯",
+        "PAGE_SUBHEADER": "共有{{num}}个幻灯",
+        "BTN_RELOAD_DATA": "刷新数据",
+        "PPT": {
+            "FILENAME": "文件名：{{fileName}}",
+            "ID": "幻灯ID：{{id}}",
+            "PAGECOUNT": "页数：",
+            "CONVERTING": "正在转换",
+            "SIZE": "大小：{{size}} B",
+            "CREATE_TIME": "创建时间： {{time}}",
+            "BTN_DELETE_PPT": "删除幻灯"
+        }
+    },
+
+    "HOLD": {
+        "PAGE_HEADER": "我发起的会议",
+        "PAGE_SUBHEADER": "共有{{num}}个会议",
+        "BTN_SHOW_MODAL_NEW_MEETING": "发起会议",
+        "BTN_REFRESH_MEETING_DATA": "刷新会议数据",
+        "MEETING": {
+            "ID": "会议编号",
+            "TOPIC": "会议主题",
+            "PPT": "所用幻灯",
+            "ATTENDEE_NUM": "观看人数"
+        },
+        "BTN_CONTROL_MEETING": "进入会议操控",
+        "BTN_DELETE_MEETING": "删除会议",
+        "MODAL_NEWMEETING": {
+            "TITLE": "发起新会议",
+            "TOPIC": "会议主题",
+            "CHOOSE_PPT": "选择PPT幻灯",
+            "BTN_CLOSE": "返回",
+            "BTN_LAUNCH_MEETING": "发起会议"
+        }
+    },
+
+    "ATTEND": {
+        "PAGE_HEADER": "我观看的会议",
+        "PAGE_SUBHEADER": "共有{{num}}个会议",
+        "BTN_SHOW_MODAL_JOIN_MEETING": "加入观看会议",
+        "BTN_REFRESH_MEETING_DATA": "刷新会议数据",
+        "MEETING": {
+            "ID": "会议ID：",
+            "TOPIC": "主题：",
+            "HOLDER": "发起人：",
+            "ATTENDEE_NUM": "观看人数"
+        },
+        "BTN_WATCH_MEETING": "进入同步观看会议",
+        "BTN_QUIT_MEETING": "退出会议",
+        "MODAL_JOIN_MEETING": {
+            "TITLE": "加入观看会议",
+            "MEETING_ID": "指定会议ID",
+            "BTN_CLOSE": "返回",
+            "BTN_JOIN_MEETING": "加入会议"
+        }
+    },
+
+    "CONTROL": {
+        "PAGE_HEADER": "控制会议 - {{topic}}",
+        "PENBAR": {
+            "CLEAR": "清空",
+            "ENABEL_SWTICH": {
+                "OPEN": "开启",
+                "CLOSE": "关闭",
+                "OPEN_ACTION": "开启同步白板",
+                "CLOSE_ACTION": "关闭同步白板"
+            }
+        }
+    },
+
+    "WATCH": {
+        "PAGE_HEADER": "观看会议 - {{topic}}",
+        "CURRENT_PAGE": "当前页",
+        "TOTAL_PAGES": "总页数"
+    }
+}

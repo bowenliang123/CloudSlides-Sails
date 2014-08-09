@@ -36,19 +36,19 @@ var jsFilesToInject = [
 
     //Angular
     'bower_components/angular/angular.min.js',
+    'bower_components/angular-translate/angular-translate.min.js',
+    'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js',
     'bower_components/angular-ui-router/release/angular-ui-router.min.js',
     'bower_components/angular-resource/angular-resource.min.js',
     'bower_components/angular-messages/angular-messages.min.js',
     'bower_components/angular-local-storage/angular-local-storage.min.js',
     'bower_components/ng-file-upload/angular-file-upload.min.js',
-    'bower_components/angular-translate/angular-translate.min.js',
 
     //jquery
     'bower_components/jquery/dist/jquery.min.js',
 
     //Bootstrap
     'bower_components/bootstrap/dist/js/bootstrap.min.js',
-
 
     //other
     'lib/flat-ui-master/js/flatui-checkbox.js',

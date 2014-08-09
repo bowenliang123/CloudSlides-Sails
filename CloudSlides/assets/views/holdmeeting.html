@@ -2,65 +2,89 @@
     <div class="row">
         <!--侧导航栏-->
         <ul class="col-sm-2 nav nav-pills nav-stacked">
-            <li><a href="#/myppt">我的幻灯</a></li>
-            <li class="active"><a href="#/holdmeeting">我发起的会议</a></li>
-            <li><a href="#/attendmeeting">我参加的会议</a></li>
+            <li><a href="#/myppt">{{'SIDE_BAR.NAV_MYPPT'|translate}}</a></li>
+            <li class="active"><a href="#/holdmeeting">{{'SIDE_BAR.NAV_HOLD'|translate}}</a></li>
+            <li><a href="#/attendmeeting">{{'SIDE_BAR.NAV_ATTEND'|translate}}</a></li>
         </ul>
 
+        <!--{{'HOLD.MODAL_NEWMEETING.'|translate}}-->
 
         <!--main content-->
         <div class="col-sm-10">
             <!--我发起的会议列表-->
             <div class="page-header">
-                <h3>我发起的会议
-                    <small> 共有{{holdMeetings.length}}个会议</small>
+                <h3>
+                    {{'HOLD.PAGE_HEADER'|translate}}
+                    <small> {{'HOLD.PAGE_SUBHEADER'|translate:'{num:holdMeetings.length}'}}</small>
                 </h3>
                 <div>
-                    <button class="btn btn-info" ng-click="showModalHoldNewMeeting()">发起会议</button>
-                    <button class="btn btn-success" ng-click="refreshMeetingData()">刷新会议数据</button>
+                    <button class="btn btn-info" ng-click="showModalHoldNewMeeting()">
+                        {{'HOLD.BTN_SHOW_MODAL_NEW_MEETING'|translate}}
+                    </button>
+                    <button class="btn btn-success" ng-click="refreshMeetingData()">
+                        {{'HOLD.BTN_REFRESH_MEETING_DATA'|translate}}
+                    </button>
                 </div>
             </div>
 
 
             <div class="panel panel-default" ng-repeat="meeting in holdMeetings">
                 <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img ng-src="/ppt/getImage?pageId=1&pptId={{meeting.ppt.id}}" class="img-thumbnail"/>
+                        </div>
 
-                    <dl class="dl-horizontal">
-                        <dt>
-                            <span class="fui-arrow-right"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会议ID:
-                        </dt>
-                        <dd>{{meeting.id}}</dd>
+                        <div class="col-sm-8">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    {{'HOLD.MEETING.ID'|translate}} &nbsp;
+                                    <span class="fui-arrow-right"></span>
+                                </dt>
+                                <dd> {{meeting.id}}</dd>
 
-                        <dt>
-                            <span class="fui-chat"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会议主题:
-                        </dt>
-                        <dd>{{meeting.topic}}</dd>
+                                <dt>
+                                    {{'HOLD.MEETING.TOPIC'|translate}} &nbsp;
+                                    <span class="fui-chat"></span>
+                                </dt>
+                                <dd>{{meeting.topic}}</dd>
 
-                        <dt>
-                            <span class="fui-calendar-solid"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对应幻灯:
-                        </dt>
-                        <dd>({{meeting.ppt.id}}) {{meeting.ppt.fileName}}</dd>
+                                <dt>
+                                    {{'HOLD.MEETING.PPT'|translate}} &nbsp;
+                                    <span class="fui-calendar-solid"></span>
+                                </dt>
+                                <dd>{{meeting.ppt.fileName}}
+                                    <div>
+                                        <small>(ID:{{meeting.ppt.id}})</small>
+                                    </div>
+                                </dd>
 
-                        <dt>
-                            <span class="fui-user"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;观看人数:
-                        </dt>
-                        <dd>{{meeting.attendees.length}}</dd>
-                    </dl>
+                                <dt>
+                                    {{'HOLD.MEETING.ATTENDEE_NUM'|translate}} &nbsp;
+                                    <span class="fui-user"></span>
+                                </dt>
+                                <dd>{{meeting.attendees.length}}</dd>
+                            </dl>
 
 
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <div class="btn-group btn-group-justified">
-                            <div class="btn-group"><a class="btn btn-sm btn-success" href="#/control/{{meeting.id}}">控制会议</a>
-                            </div>
-                            <div class="btn-group">
-                                <button class="btn btn-sm btn-warning"
-                                        ng-click="deleteHoldMeeting(meeting.id)">删除
-                                </button>
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <div class="btn-group btn-group-justified">
+                                    <div class="btn-group"><a class="btn btn-sm btn-success"
+                                                              href="#/control/{{meeting.id}}">
+                                        {{'HOLD.BTN_CONTROL_MEETING'|translate}}
+                                    </a>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-warning"
+                                                ng-click="deleteHoldMeeting(meeting.id)">
+                                            {{'HOLD.BTN_DELETE_MEETING'|translate}}
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!--</form>-->
                 </div>
             </div>
 
@@ -76,14 +100,17 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span
                             aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel">发起新会议</h4>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{'HOLD.MODAL_NEWMEETING.TITLE'|translate}}
+
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <!--输入会议主题-->
-                    <h5>会议主题</h5>
+                    <h5>{{'HOLD.MODAL_NEWMEETING.TOPIC'|translate}}</h5>
                     <input type="text" placeholder="输入会议主题" class="form-control" ng-model="newMeetingTopic"/>
                     <!--选择PPT-->
-                    <h5>选择PPT</h5>
+                    <h5>{{'HOLD.MODAL_NEWMEETING.CHOOSE_PPT'|translate}}</h5>
 
                     <div ng-repeat="ppt in ppts">
                         <input type="radio" ng-model="$parent.pptId" value="{{ppt.id}}" ng-change="alert('hi')"/>
@@ -91,8 +118,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="holdNewMeeting()">发起会议</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        {{'HOLD.MODAL_NEWMEETING.BTN_CLOSE'|translate}}
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="holdNewMeeting()">
+                        {{'HOLD.MODAL_NEWMEETING.BTN_LAUNCH_MEETING'|translate}}
+                    </button>
                 </div>
             </div>
         </div>
